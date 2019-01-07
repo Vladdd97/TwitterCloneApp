@@ -1,12 +1,15 @@
 package com.faf.twitterCloneApp.bootstrap;
 
+import com.faf.twitterCloneApp.models.Authority;
 import com.faf.twitterCloneApp.models.Twitt;
 import com.faf.twitterCloneApp.models.TwitterUser;
+import com.faf.twitterCloneApp.repositories.AuthorityRepository;
 import com.faf.twitterCloneApp.services.TwittServiceImpl;
 import com.faf.twitterCloneApp.services.TwitterUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationListener;
 import org.springframework.context.event.ContextRefreshedEvent;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
@@ -19,6 +22,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired
     private TwitterUserServiceImpl twitterUserServiceImpl;
+
+    @Autowired
+    private AuthorityRepository authorityRepository;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -48,16 +54,24 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         twitt2.setContent("Content 2 : just need more time for that");
         twitt2.setTwitterUser(twitterUser1);
 
-
-
         twitts.add(twitt1);
         twitts.add(twitt2);
 
+        Authority authority1 = new Authority();
+        authority1.setRole("ROLE_USER");
+        authority1.setTwitterUser(twitterUser1);
+
+        ArrayList<Authority> authorities = new ArrayList<>();
+        authorities.add(authority1);
+
         twitterUser1.setTwitts(twitts);
+        twitterUser1.setAuthorities(authorities);
         twitterUserServiceImpl.save(twitterUser1);
 
         twittServiceImpl.save(twitt1);
         twittServiceImpl.save(twitt2);
+
+        authorityRepository.save(authority1);
 
 
 
