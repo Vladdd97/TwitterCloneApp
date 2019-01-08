@@ -6,6 +6,7 @@ import javax.persistence.*;
 
 
 @Data
+@AllArgsConstructor
 @Entity
 public class Reaction {
 
@@ -21,5 +22,7 @@ public class Reaction {
 
     @ManyToOne
     private Tweet tweet;
+
+    public Reaction(){}
 
 }

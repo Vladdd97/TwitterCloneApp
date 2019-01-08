@@ -9,6 +9,7 @@ import java.util.Date;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class Tweet {
 
@@ -33,6 +34,8 @@ public class Tweet {
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "tweet")
     private List<Reaction> reactions;
+
+    public Tweet(){}
 
 
 }

@@ -9,6 +9,7 @@ import javax.validation.constraints.NotNull;
 import java.util.List;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class TwitterUser {
 
@@ -43,5 +44,6 @@ public class TwitterUser {
     @OneToOne(cascade = CascadeType.ALL , mappedBy = "twitterUser")
     private TwitterUserInfo twitterUserInfo;
 
+    public TwitterUser(){}
 
 }

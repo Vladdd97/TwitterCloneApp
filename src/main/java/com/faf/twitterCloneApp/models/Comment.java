@@ -8,6 +8,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class Comment {
 
@@ -30,5 +31,7 @@ public class Comment {
 
     @ManyToOne
     private TwitterUser twitterUser;
+
+    public Comment(){}
 
 }

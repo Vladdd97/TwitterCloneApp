@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class TwitterUserInfo {
 
@@ -22,5 +23,7 @@ public class TwitterUserInfo {
 
     @OneToOne
     private TwitterUser twitterUser;
+
+    public TwitterUserInfo(){}
 
 }

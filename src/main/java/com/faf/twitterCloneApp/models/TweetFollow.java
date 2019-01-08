@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class TweetFollow {
 
@@ -19,5 +20,7 @@ public class TweetFollow {
 
     @ManyToOne
     private TwitterUser follower;
+
+    public TweetFollow(){}
 
 }

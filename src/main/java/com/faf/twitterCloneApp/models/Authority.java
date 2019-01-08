@@ -6,6 +6,7 @@ import lombok.*;
 import javax.persistence.*;
 
 @Data
+@AllArgsConstructor
 @Entity
 public class Authority {
 
