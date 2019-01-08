@@ -7,6 +7,7 @@ import com.faf.twitterCloneApp.repositories.TwittRepository;
 import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
 import com.faf.twitterCloneApp.services.TwittServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,7 +26,10 @@ public class IndexController {
 
     @GetMapping("/")
     public String index (){
-
+//        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+//        String password = "dev";
+//        System.out.println("password : " + password);
+//        System.out.println("PASSWORD : " + bCryptPasswordEncoder.encode(password));
        return "index";
     }
 

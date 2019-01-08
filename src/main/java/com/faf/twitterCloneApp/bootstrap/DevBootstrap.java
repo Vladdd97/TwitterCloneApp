@@ -34,6 +34,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     public void initData(){
+
+        initUser1();
+        initUser2();
+
+    }
+
+    public void initUser1(){
         //user 1
         TwitterUser twitterUser1 = new TwitterUser();
         twitterUser1.setUsername("Vasile");
@@ -71,9 +78,57 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 //        twittServiceImpl.save(twitt2);
 //
 //        authorityRepository.save(authority1);
+    }
+
+    public void initUser2() {
+
+        //user 2
+        TwitterUser twitterUser2 = new TwitterUser();
+        twitterUser2.setUsername("dev");
+        twitterUser2.setPassword("$2a$10$x2.lce1UfZDumfBN3fcCeOhBaUJT2xEGw9LABlvcuRsDCMXFhLdLy"); //dev
+        twitterUser2.setEnabled(true);
 
 
+        ArrayList<Twitt> twitts = new ArrayList<>();
 
+        Twitt twitt1 = new Twitt();
+        twitt1.setTitle("Abduction");
+        twitt1.setContent("A thriller centered on a young man who sets out to uncover the truth about his life after finding his baby photo on a missing persons website.");
+        twitt1.setTwitterUser(twitterUser2);
+
+        Twitt twitt2 = new Twitt();
+        twitt2.setTitle("A Christmas Too Many");
+        twitt2.setContent("A Hollywood legend invites her not-so-normal family home for the holidays.");
+        twitt2.setTwitterUser(twitterUser2);
+
+        Twitt twitt3 = new Twitt();
+        twitt3.setTitle("The Hunger Games");
+        twitt3.setContent("Following her rescue from the devastating Quarter Quell, " +
+                "Katniss (Jennifer Lawrence) awakes in the complex beneath the supposedly destroyed District 13. " +
+                "Her home, District 12, has been reduced to rubble, and Peeta Mellark (Josh Hutcherson) is now the brainwashed " +
+                "captive of President Snow (Donald Sutherland). At the same time, Katniss also learns about a secret rebellion spreading " +
+                "throughout all of Panem -- a rebellion that will place her at the center of a plot to turn the tables on Snow. ");
+        twitt3.setTwitterUser(twitterUser2);
+
+        twitts.add(twitt1);
+        twitts.add(twitt2);
+        twitts.add(twitt3);
+
+        Authority authority1 = new Authority();
+        authority1.setRole("ROLE_USER");
+        authority1.setTwitterUser(twitterUser2);
+
+        ArrayList<Authority> authorities = new ArrayList<>();
+        authorities.add(authority1);
+
+        twitterUser2.setTwitts(twitts);
+        twitterUser2.setAuthorities(authorities);
+        twitterUserServiceImpl.save(twitterUser2);
+
+//        twittServiceImpl.save(twitt1);
+//        twittServiceImpl.save(twitt2);
+//
+//        authorityRepository.save(authority1);
 
     }
 
