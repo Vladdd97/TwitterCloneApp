@@ -1,9 +1,12 @@
 package com.faf.twitterCloneApp.controllers;
 
 
+import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.models.TweetFollow;
+import com.faf.twitterCloneApp.models.TwitterUser;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
+import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
@@ -35,6 +38,9 @@ public class IndexController {
 
     @Autowired
     TweetFollowServiceImpl tweetFollowServiceImpl;
+    //delete
+    @Autowired
+    TwitterUserRepository twitterUserRepository;
 
 
 
@@ -49,7 +55,14 @@ public class IndexController {
         if ( principal != null) {
             model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
             model.addAttribute("newTweet",new Tweet());
+            model.addAttribute("newComment",new Comment());
             model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber,pageSize));
+            //model.addAttribute("authenticatedUserUsername",principal.getName());
+            //Page<TwitterUser> users = twitterUserRepository.findSuggestFollowUsers(new PageRequest(0,5));
+            TwitterUser dev = twitterUserServiceImpl.findByUsername(principal.getName()).get();
+
+            int a=44;
+
             return "index";
         }
         else{
