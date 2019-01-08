@@ -9,7 +9,10 @@
 <body>
 <th:block th:include="partialViews/navbar :: navbar" ></th:block>
 <h3>User Details</h3>
-<h1 th:text = ${userDetails}> mda </h1>
+
+<h1 th:if ="${userDetails.getName() != null}">
+<span th:text="${userDetails.getName()}" ></span>
+</h1>
 
 
 

@@ -22,6 +22,12 @@
             <li class="nav-item">
                 <a th:href="@{/logoutPage}" class="nav-link">Log Out</a>
             </li>
+            <li th:if ="${userDetails != null}"  class="nav-item">
+                <a  th:href="@{/userdetails}"  th:text="${userDetails.getName()}" class="nav-link">userName</a>
+            </li>
+            <li th:if ="${userDetails == null}"  class="nav-item">
+                <a  th:href="@{/}" class="nav-link">Guest</a>
+            </li>
 
         </ul>
     </nav>

@@ -27,11 +27,12 @@ public class IndexController {
 
 
     @GetMapping("/")
-    public String index (){
+    public String index (Model model , Principal principal){
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String password = "dev";
 //        System.out.println("password : " + password);
 //        System.out.println("PASSWORD : " + bCryptPasswordEncoder.encode(password));
+        model.addAttribute("userDetails",principal);
        return "index";
     }
 
@@ -45,18 +46,17 @@ public class IndexController {
     public String userTwitts (Model model , Principal principal){
 
         Iterable<Twitt> twitts ;
-        String username = principal.getName();
 
-        twitts = twittServiceImpl.findAllByTwitterUserUsername(username);
+        twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
 
         model.addAttribute("userTwitts",twitts);
-        model.addAttribute("username",username);
+        model.addAttribute("userDetails",principal);
         return "userTwitts";
     }
 
     @GetMapping("/loginPage")
     public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
-                                  @RequestParam(value = "logout",	required = false) String logout){
+                                  @RequestParam(value = "logout",	required = false) String logout , Principal principal){
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", "Invalid Credentials provided.");
@@ -65,16 +65,17 @@ public class IndexController {
         if (logout != null) {
             model.addObject("logout", "Logged out from TwitterCloneApp successfully.");
         }
-
+        model.addObject("userDetails",principal);
         model.setViewName("loginPage");
         return model;
     }
 
 
     @GetMapping("/logoutPage")
-    public ModelAndView logoutPage(){
+    public ModelAndView logoutPage(Principal principal){
         ModelAndView model = new ModelAndView();
 
+        model.addObject("userDetails",principal);
         model.setViewName("logoutPage");
         return model;
     }
