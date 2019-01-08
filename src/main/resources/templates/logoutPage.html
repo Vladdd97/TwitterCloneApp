@@ -8,12 +8,25 @@
 </head>
 <body>
 <th:block th:include="partialViews/navbar :: navbar" ></th:block>
-<h3>User Details</h3>
 
-<h1 th:if ="${userDetails.getName() != null}">
-<span th:text="${userDetails.getName()}" ></span>
-</h1>
+<br></br>
+<h3>Login Page </h3>
 
+
+
+<div class="container">
+    <form method="POST" th:action="@{/logoutPage}" class="form-signin">
+        <h2 class="form-heading">Log Out</h2>
+
+        <div class="form-group ">
+
+            <button class="btn btn-lg btn-primary btn-block" type="submit">Log Out</button>
+        </div>
+
+    </form>
+
+</div>
+<!-- /container -->
 
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>

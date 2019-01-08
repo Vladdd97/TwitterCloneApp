@@ -49,10 +49,31 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/userdetails*").hasRole("USER")
                 .antMatchers("/usertwitts*").hasRole("USER")
                 .antMatchers("/*").permitAll()
-                .and().formLogin().permitAll()
-                .and().logout().permitAll();
+                .and().formLogin()
+                .loginPage("/loginPage")
+                .loginProcessingUrl("/loginPage")
+                .defaultSuccessUrl("/")
+                .failureUrl("/loginPage?error")
+                .permitAll()
+                .and().logout()
+                .logoutUrl("/logoutPage")
+                .logoutSuccessUrl("/loginPage?logout")
+                .permitAll()
+                .and().httpBasic();
 
 
+
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/userdetails*").hasRole("USER")
+//                .antMatchers("/usertwitts*").hasRole("USER")
+//                .antMatchers("/*").permitAll()
+//                .and().formLogin()
+//                .permitAll()
+//                .and().logout().permitAll()
+//                .and().httpBasic();
     }
+
+
 
 }
