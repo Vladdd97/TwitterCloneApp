@@ -3,6 +3,7 @@ package com.faf.twitterCloneApp.controllers;
 
 import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.models.TweetFollow;
+import com.faf.twitterCloneApp.repositories.TweetRepository;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
@@ -14,8 +15,10 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.servlet.ModelAndView;
 
+import java.math.BigInteger;
 import java.security.Principal;
 import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 public class IndexController {
@@ -31,6 +34,10 @@ public class IndexController {
     @Autowired
     TweetFollowServiceImpl tweetFollowServiceImpl;
 
+    // delete
+    @Autowired
+    TweetRepository tweetRepository;
+
 
     @GetMapping("/")
     public String index (Model model , Principal principal){
@@ -41,6 +48,10 @@ public class IndexController {
         if ( principal != null) {
             model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
             model.addAttribute("newTweet",new Tweet());
+            // delete
+            List<Object> tweets = tweetServiceImpl.findTopTweetsByNumberOfReactions();
+//            int a = ( (BigInteger) tweetIds.get(0) ).intValue();
+//            int b = ( (BigInteger) tweetIds.get(1) ).intValue();
             return "index";
         }
         else{

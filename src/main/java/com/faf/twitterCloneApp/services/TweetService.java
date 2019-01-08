@@ -2,6 +2,8 @@ package com.faf.twitterCloneApp.services;
 
 import com.faf.twitterCloneApp.models.Tweet;
 
+import java.util.List;
+
 public interface TweetService {
 
     Iterable<Tweet> findAll();
@@ -15,5 +17,7 @@ public interface TweetService {
     Long count();
 
     Iterable<Tweet> findAllByTwitterUserUsername(String username);
+
+    List<Object> findTopTweetsByNumberOfReactions();
 
 }

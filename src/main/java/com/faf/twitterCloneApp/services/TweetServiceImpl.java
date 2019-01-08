@@ -5,6 +5,8 @@ import com.faf.twitterCloneApp.repositories.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class TweetServiceImpl implements TweetService {
 
@@ -39,5 +41,12 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public Iterable<Tweet> findAllByTwitterUserUsername(String username) {
         return tweetRepository.findAllByTwitterUserUsername(username);
+    }
+
+    @Override
+    public List<Object> findTopTweetsByNumberOfReactions() {
+        List<Object> tweetIds = tweetRepository.findTopTweetsByNumberOfReactions();
+
+        return tweetIds;
     }
 }
