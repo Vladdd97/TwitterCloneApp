@@ -1,10 +1,8 @@
 package com.faf.twitterCloneApp.bootstrap;
 
-import com.faf.twitterCloneApp.models.Authority;
-import com.faf.twitterCloneApp.models.Twitt;
-import com.faf.twitterCloneApp.models.TwittFollow;
-import com.faf.twitterCloneApp.models.TwitterUser;
+import com.faf.twitterCloneApp.models.*;
 import com.faf.twitterCloneApp.repositories.AuthorityRepository;
+import com.faf.twitterCloneApp.services.CommentServiceImpl;
 import com.faf.twitterCloneApp.services.TwittFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TwittServiceImpl;
 import com.faf.twitterCloneApp.services.TwitterUserServiceImpl;
@@ -31,6 +29,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     @Autowired
     private TwittFollowServiceImpl twittFollowServiceImpl;
+
+    @Autowired
+    private CommentServiceImpl commentServiceImpl;
 
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
@@ -72,6 +73,14 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             twitt2.setCreateDate(new Date());
             twitt2.setTwitterUser(twitterUser1);
 
+            // add comment
+            Comment comment = new Comment();
+            comment.setContent("This is a simple comment ...");
+            comment.setCreateByUser("dev");
+            comment.setCreateDate(new Date());
+            comment.setTwitt(twitt2);
+
+
             twitts.add(twitt1);
             twitts.add(twitt2);
 
@@ -85,6 +94,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             twitterUser1.setTwitts(twitts);
             twitterUser1.setAuthorities(authorities);
             twitterUserServiceImpl.save(twitterUser1);
+
+            //comment
+            commentServiceImpl.save(comment);
 
 //        twittServiceImpl.save(twitt1);
 //        twittServiceImpl.save(twitt2);

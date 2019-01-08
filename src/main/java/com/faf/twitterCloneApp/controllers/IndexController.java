@@ -1,13 +1,8 @@
 package com.faf.twitterCloneApp.controllers;
 
 
-import com.faf.twitterCloneApp.models.Twitt;
-import com.faf.twitterCloneApp.models.TwitterUser;
-import com.faf.twitterCloneApp.repositories.TwittRepository;
-import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
-import com.faf.twitterCloneApp.services.TwittServiceImpl;
+import com.faf.twitterCloneApp.services.TwittService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,15 +10,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
-import java.util.ArrayList;
-import java.util.Optional;
 
 @Controller
 public class IndexController {
 
 
     @Autowired
-    TwittServiceImpl twittServiceImpl;
+    TwittService twittServiceImpl;
 
 
     @GetMapping("/")
@@ -36,23 +29,6 @@ public class IndexController {
        return "index";
     }
 
-//    @GetMapping("/userdetails")
-//    public String userDetails (Model model , Principal principal){
-//        model.addAttribute("userDetails",principal);
-//        return "userDetails";
-//    }
-//
-//    @GetMapping("/usertwitts")
-//    public String userTwitts (Model model , Principal principal){
-//
-//        Iterable<twitt> twitts ;
-//
-//        twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
-//
-//        model.addAttribute("userTwitts",twitts);
-//        model.addAttribute("userDetails",principal);
-//        return "userTwitts";
-//    }
 
     @GetMapping("/loginPage")
     public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,

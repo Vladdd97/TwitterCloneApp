@@ -3,7 +3,9 @@ package com.faf.twitterCloneApp.services;
 import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.repositories.CommentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
+@Service
 public class CommentServiceImpl implements CommentService {
 
     @Autowired

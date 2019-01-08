@@ -1,10 +1,8 @@
 package com.faf.twitterCloneApp.controllers;
 
-
 import com.faf.twitterCloneApp.models.Twitt;
-import com.faf.twitterCloneApp.models.TwittFollow;
 import com.faf.twitterCloneApp.services.TwittFollowServiceImpl;
-import com.faf.twitterCloneApp.services.TwittServiceImpl;
+import com.faf.twitterCloneApp.services.TwittService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -13,14 +11,13 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
-import java.util.List;
 
 @Controller
 @RequestMapping("/twitterUser")
 public class TwitterUserController {
 
     @Autowired
-    TwittServiceImpl twittServiceImpl;
+    TwittService twittServiceImpl;
 
     @Autowired
     TwittFollowServiceImpl twittFollowServiceImpl;
