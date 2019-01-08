@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+<title>index</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+
+
+<th:block th:include="partialViews/navbar :: navbar" ></th:block>
+
+<h3>Create new Tweet Controller</h3>
+
+
+
+
+<div class="container">
+    <h3>RegisterPage</h3>
+    <form   th:action="@{/registerNewUser}" th:object="${newTwitterUser}" method="post">
+        <input type="hidden" th:field="*{id}"/>
+
+        <div class="form-group">
+            <label for="username">username:</label>
+            <input class="form-control" id="username" th:field="*{username}" >
+        </div>
+
+        <div class="form-group">
+            <label for="email">email:</label>
+            <input class="form-control" id="email" th:field="*{twitterUserInfo.email}" >
+        </div>
+
+        <div class="form-group">
+            <label for="password">password:</label>
+            <input class="form-control" id="password" th:field="*{password}" >
+        </div>
+
+
+
+        <button type="submit" class="btn btn-primary">Submit</button>
+    </form>
+</div>
+
+
+<th:block th:include="partialViews/footer :: footer"></th:block>
+
+</body>
+</html>
