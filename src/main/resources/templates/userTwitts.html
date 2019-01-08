@@ -43,7 +43,7 @@
                         <span>Posted on</span>
                         <span th:text="${twitt.getCreateDate().toLocaleString()}" > ...</span>
                         <span>by</span>
-                        <span th:text="${userDetails.getName()}">no user</span>
+                        <span th:text="${twitt.getTwitterUser().getUsername()}">no user</span>
                     </div>
                 </div>
             </div>

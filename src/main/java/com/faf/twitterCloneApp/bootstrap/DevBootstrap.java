@@ -2,8 +2,10 @@ package com.faf.twitterCloneApp.bootstrap;
 
 import com.faf.twitterCloneApp.models.Authority;
 import com.faf.twitterCloneApp.models.Twitt;
+import com.faf.twitterCloneApp.models.TwittFollow;
 import com.faf.twitterCloneApp.models.TwitterUser;
 import com.faf.twitterCloneApp.repositories.AuthorityRepository;
+import com.faf.twitterCloneApp.services.TwittFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TwittServiceImpl;
 import com.faf.twitterCloneApp.services.TwitterUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,6 +29,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     @Autowired
     private AuthorityRepository authorityRepository;
 
+    @Autowired
+    private TwittFollowServiceImpl twittFollowServiceImpl;
+
     @Override
     public void onApplicationEvent(ContextRefreshedEvent event) {
 
@@ -38,6 +43,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
         initUser1();
         initUser2();
+        initTwittFollow();
 
     }
 
@@ -135,6 +141,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 //        twittServiceImpl.save(twitt2);
 //
 //        authorityRepository.save(authority1);
+
+    }
+
+    public void initTwittFollow(){
+
+        TwittFollow twittFollow = new TwittFollow();
+        twittFollow.setFollowing(twitterUserServiceImpl.findByUsername("dev").get());
+        twittFollow.setFollower(twitterUserServiceImpl.findByUsername("vasile").get());
+        twittFollowServiceImpl.save(twittFollow);
+
 
     }
 
