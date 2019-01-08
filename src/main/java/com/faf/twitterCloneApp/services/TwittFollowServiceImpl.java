@@ -35,4 +35,20 @@ public class TwittFollowServiceImpl implements TwittFollowService{
     public Long count() {
         return twittFollowRepository.count();
     }
+
+//    @Override
+//    public Iterable<TwittFollow> findAllByFollowingUsernameOrFollowerUsername(String following,String follower) {
+//        return twittFollowRepository.findAllByFollowingUsernameOrFollowerUsername(following,follower);
+//    }
+
+
+    @Override
+    public Iterable<TwittFollow> findAllByFollowingUsername(String username) {
+        return twittFollowRepository.findAllByFollowingUsername(username);
+    }
+
+    @Override
+    public Iterable<TwittFollow> findAllByFollowerUsername(String username) {
+        return twittFollowRepository.findAllByFollowerUsername(username);
+    }
 }

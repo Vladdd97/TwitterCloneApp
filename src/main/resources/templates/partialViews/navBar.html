@@ -11,10 +11,10 @@
                 <a th:href="@{/}" class="nav-link">HOME</a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/userdetails}" class="nav-link">Profile</a>
+                <a th:href="@{/twitterUser/userDetails}" class="nav-link">Profile</a>
             </li>
             <li class="nav-item">
-                <a th:href="@{/usertwitts}" class="nav-link">Twitts</a>
+                <a th:href="@{/twitterUser/userTwitts}" class="nav-link">Twitts</a>
             </li>
             <li class="nav-item">
                 <a th:href="@{/loginPage}" class="nav-link">Log In</a>
@@ -23,7 +23,7 @@
                 <a th:href="@{/logoutPage}" class="nav-link">Log Out</a>
             </li>
             <li th:if ="${userDetails != null}"  class="nav-item">
-                <a  th:href="@{/userdetails}"  th:text="${userDetails.getName()}" class="nav-link">userName</a>
+                <a  th:href="@{/twitterUser/userDetails}"  th:text="${userDetails.getName()}" class="nav-link">userName</a>
             </li>
             <li th:if ="${userDetails == null}"  class="nav-item">
                 <a  th:href="@{/}" class="nav-link">Guest</a>

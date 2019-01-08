@@ -146,10 +146,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     public void initTwittFollow(){
 
-        TwittFollow twittFollow = new TwittFollow();
-        twittFollow.setFollowing(twitterUserServiceImpl.findByUsername("dev").get());
-        twittFollow.setFollower(twitterUserServiceImpl.findByUsername("vasile").get());
-        twittFollowServiceImpl.save(twittFollow);
+        TwittFollow twittFollow1 = new TwittFollow();
+        twittFollow1.setFollowing(twitterUserServiceImpl.findByUsername("dev").get());
+        twittFollow1.setFollower(twitterUserServiceImpl.findByUsername("vasile").get());
+
+        TwittFollow twittFollow2 = new TwittFollow();
+        twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile").get());
+        twittFollow2.setFollower(twitterUserServiceImpl.findByUsername("dev").get());
+
+        twittFollowServiceImpl.save(twittFollow1);
+        twittFollowServiceImpl.save(twittFollow2);
 
 
     }

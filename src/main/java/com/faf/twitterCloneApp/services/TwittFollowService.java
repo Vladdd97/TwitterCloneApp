@@ -14,4 +14,12 @@ public interface TwittFollowService {
 
     Long count();
 
+    //Iterable<TwittFollow> findAllByFollowingUsernameOrFollowerUsername (String following,String follower);
+
+
+    Iterable<TwittFollow> findAllByFollowingUsername (String username);
+
+    Iterable<TwittFollow> findAllByFollowerUsername (String username);
+
+
 }

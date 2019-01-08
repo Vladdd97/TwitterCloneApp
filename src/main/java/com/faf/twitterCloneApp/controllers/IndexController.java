@@ -36,23 +36,23 @@ public class IndexController {
        return "index";
     }
 
-    @GetMapping("/userdetails")
-    public String userDetails (Model model , Principal principal){
-        model.addAttribute("userDetails",principal);
-        return "userDetails";
-    }
-
-    @GetMapping("/usertwitts")
-    public String userTwitts (Model model , Principal principal){
-
-        Iterable<Twitt> twitts ;
-
-        twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
-
-        model.addAttribute("userTwitts",twitts);
-        model.addAttribute("userDetails",principal);
-        return "userTwitts";
-    }
+//    @GetMapping("/userdetails")
+//    public String userDetails (Model model , Principal principal){
+//        model.addAttribute("userDetails",principal);
+//        return "userDetails";
+//    }
+//
+//    @GetMapping("/usertwitts")
+//    public String userTwitts (Model model , Principal principal){
+//
+//        Iterable<twitt> twitts ;
+//
+//        twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
+//
+//        model.addAttribute("userTwitts",twitts);
+//        model.addAttribute("userDetails",principal);
+//        return "userTwitts";
+//    }
 
     @GetMapping("/loginPage")
     public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,

@@ -28,7 +28,7 @@ public class TwittController {
 
         model.addAttribute("twitt",new Twitt());
         model.addAttribute("userDetails",principal);
-        return "Twitt/twittFrom";
+        return "twitt/twittFrom";
     }
 
     @PostMapping("/saveOrUpdate")
@@ -39,7 +39,7 @@ public class TwittController {
         twittServiceImpl.save(twitt);
 
         model.addAttribute("userDetails",principal);
-        return "redirect:/usertwitts";
+        return "redirect:/twitterUser/userTwitts";
     }
 
 
@@ -47,14 +47,14 @@ public class TwittController {
     public String updateTwitt (@RequestParam("id") String id, Model model , Principal principal){
         model.addAttribute("twitt", twittServiceImpl.findById(Long.valueOf(id)));
         model.addAttribute("userDetails",principal);
-        return  "Twitt/twittFrom";
+        return  "twitt/twittFrom";
     }
 
 
     @GetMapping("/deleteTwitt")
     public String deleteTwitt (@RequestParam("id") String id){
         twittServiceImpl.deleteById(Long.valueOf(id));
-        return  "redirect:/usertwitts";
+        return  "redirect:/twitt/userTwitts";
     }
 
 }

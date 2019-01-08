@@ -25,7 +25,7 @@
 //    private String writeByUser;
 //
 //    @ManyToOne
-//    private Twitt twitt;
+//    private twitt twitt;
 //
 //    public Long getId() {
 //        return id;
@@ -59,11 +59,11 @@
 //        this.writeByUser = writeByUser;
 //    }
 //
-//    public Twitt getTwitt() {
+//    public twitt getTwitt() {
 //        return twitt;
 //    }
 //
-//    public void setTwitt(Twitt twitt) {
+//    public void setTwitt(twitt twitt) {
 //        this.twitt = twitt;
 //    }
 //}
