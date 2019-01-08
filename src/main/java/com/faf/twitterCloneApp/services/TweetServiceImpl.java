@@ -53,6 +53,11 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public Iterable<Tweet> findAllByTwitterUserUsernameAndType(String username, TweetType tweetType) {
+        return tweetRepository.findAllByTwitterUserUsernameAndType(username,tweetType);
+    }
+
+    @Override
     public Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username) {
         return tweetRepository.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
     }

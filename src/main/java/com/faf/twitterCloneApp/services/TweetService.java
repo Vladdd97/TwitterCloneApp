@@ -22,6 +22,9 @@ public interface TweetService {
 
     Iterable<Tweet> findAllByTwitterUserUsername(String username);
 
+    Iterable<Tweet> findAllByTwitterUserUsernameAndType(String username, TweetType tweetType);
+
+
     Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
 
     Optional<Tweet> findByParentTweetIdAndTypeAndTwitterUserUsername (Long parentTweetId, TweetType tweetType, String username);

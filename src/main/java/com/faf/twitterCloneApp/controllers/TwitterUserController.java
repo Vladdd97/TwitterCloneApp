@@ -4,6 +4,7 @@ import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.models.TweetFollow;
 import com.faf.twitterCloneApp.models.TwitterUser;
+import com.faf.twitterCloneApp.models.util.TweetType;
 import com.faf.twitterCloneApp.repositories.TweetFollowRepository;
 import com.faf.twitterCloneApp.services.TweetFollowService;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
@@ -84,6 +85,11 @@ public class TwitterUserController {
 
     @GetMapping("/bookmarkPage")
     public String bookmarkPage(Model model, Principal principal) {
+
+        model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
+        model.addAttribute("tweets",tweetServiceImpl.findAllByTwitterUserUsernameAndType(principal.getName(), TweetType.Bookmark));
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("authenticatedUserUsername",principal.getName());
 
         return "twitterUser/bookmarkPage";
     }
