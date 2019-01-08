@@ -10,7 +10,7 @@ public class AuthorityServiceImpl implements AuthorityService {
     AuthorityRepository authorityRepository;
 
     @Override
-    public Iterable<Authority> getAll() {
+    public Iterable<Authority> findAll() {
         return authorityRepository.findAll();
     }
 

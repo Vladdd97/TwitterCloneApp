@@ -4,7 +4,7 @@ import com.faf.twitterCloneApp.models.TweetFollow;
 
 public interface TweetFollowService {
 
-    Iterable<TweetFollow> getAll();
+    Iterable<TweetFollow> findAll();
 
     TweetFollow findById (Long id);
 

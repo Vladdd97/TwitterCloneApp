@@ -4,7 +4,7 @@ import com.faf.twitterCloneApp.models.Comment;
 
 public interface CommentService {
 
-    Iterable<Comment> getAll();
+    Iterable<Comment> findAll();
 
     Comment findById (Long id);
 

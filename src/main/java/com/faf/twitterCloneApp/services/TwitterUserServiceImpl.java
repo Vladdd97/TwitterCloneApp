@@ -14,7 +14,7 @@ public class TwitterUserServiceImpl implements TwitterUserService {
     TwitterUserRepository twitterUserRepository;
 
     @Override
-    public Iterable<TwitterUser> getAll() {
+    public Iterable<TwitterUser> findAll() {
         return twitterUserRepository.findAll();
     }
 
