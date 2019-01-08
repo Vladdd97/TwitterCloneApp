@@ -17,9 +17,7 @@
     <div class="row">
 
         <div class="col-md-2" >
-            <button type="button" class="btn btn-info">
-                <a th:href="@{/twitt/twittForm}" class="nav-link">Write new post</a>
-            </button>
+                <a th:href="@{/twitt/twittForm}" class="btn btn-info">Write new post</a>
         </div>
 
 
@@ -38,12 +36,14 @@
                         <h2  th:text="${twitt.getTitle()}" class="card-title">Post Title</h2>
                         <p  th:text="${twitt.getContent()}" class="card-text">Post text</p>
                         <a href="#" class="btn btn-primary">Read More &rarr;</a>
+                        <a th:href="@{/twitt/updateTwitt(id=${twitt.getId()})}" class="btn btn-primary">Modify</a>
+                        <a th:href="@{/twitt/deleteTwitt(id=${twitt.getId()})}" class="btn btn-danger">Delete</a>
                     </div>
                     <div class="card-footer text-muted">
                         <span>Posted on</span>
                         <span th:text="${twitt.getCreateDate().toLocaleString()}" > ...</span>
                         <span>by</span>
-                        <a th:text="${userDetails.getName()}"  href="#">no user</a>
+                        <span th:text="${userDetails.getName()}">no user</span>
                     </div>
                 </div>
             </div>

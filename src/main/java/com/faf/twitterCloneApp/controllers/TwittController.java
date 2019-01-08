@@ -8,10 +8,7 @@ import com.faf.twitterCloneApp.services.TwitterUserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Date;
@@ -30,6 +27,7 @@ public class TwittController {
     public String twittFrom (Model model , Principal principal){
 
         model.addAttribute("twitt",new Twitt());
+        model.addAttribute("userDetails",principal);
         return "Twitt/twittFrom";
     }
 
@@ -40,6 +38,20 @@ public class TwittController {
         twitt.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         twittServiceImpl.save(twitt);
         return "redirect:/usertwitts";
+    }
+
+
+    @GetMapping("/updateTwitt")
+    public String updateTwitt (@RequestParam("id") String id, Model model){
+        model.addAttribute("twitt", twittServiceImpl.findById(Long.valueOf(id)));
+        return  "Twitt/twittFrom";
+    }
+
+
+    @GetMapping("/deleteTwitt")
+    public String deleteTwitt (@RequestParam("id") String id){
+        twittServiceImpl.deleteById(Long.valueOf(id));
+        return  "redirect:/usertwitts";
     }
 
 }
