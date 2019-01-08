@@ -1,10 +1,7 @@
 package com.faf.twitterCloneApp.controllers;
 
 
-import com.faf.twitterCloneApp.models.Comment;
-import com.faf.twitterCloneApp.models.Tweet;
-import com.faf.twitterCloneApp.models.TweetFollow;
-import com.faf.twitterCloneApp.models.TwitterUser;
+import com.faf.twitterCloneApp.models.*;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
 import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
@@ -13,11 +10,10 @@ import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.ResponseStatus;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
 import java.math.BigInteger;
@@ -52,6 +48,41 @@ public class IndexController {
             return "redirect:/loginPage";
         }
     }
+
+
+
+    @GetMapping("/registerPage")
+    public String registerPage(Model model, Principal principal) {
+
+
+        model.addAttribute("newTwitterUser",new TwitterUser());
+
+        return "registerPage";
+    }
+
+
+    @PostMapping("/registerNewUser")
+    public String registerNewUser(@ModelAttribute TwitterUser twitterUser, Model model, Principal principal) {
+
+
+        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
+        String password = twitterUser.getPassword();
+
+        twitterUser.setPassword(bCryptPasswordEncoder.encode(password));
+        twitterUser.setEnabled(true);
+
+        Authority authority = new Authority();
+        authority.setRole("ROLE_USER");
+        authority.setTwitterUser(twitterUser);
+
+        ArrayList<Authority> authorities = new ArrayList<>();
+        authorities.add(authority);
+        twitterUser.setAuthorities(authorities);
+
+        twitterUserServiceImpl.save(twitterUser);
+        return "redirect:/loginPage";
+    }
+
 
 
     @GetMapping("/loginPage")
