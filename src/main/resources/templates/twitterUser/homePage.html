@@ -68,7 +68,7 @@
                 <div th:each="user:${suggestFollowUsers}" class="card mt-2">
                     <div class="card-body">
                         <a th:text="${user.getUsername()}" th:href="@{/twitterUser/profilePage(username=${user.getUsername()})}"   ></a>
-                        <a th:href="@{/twitterUser/followUser(username=${user.getUsername()})}" class="btn btn-primary ml-5">Follow</a>
+                        <a th:href="@{/tweetFollow/followUser(username=${user.getUsername()})}" class="btn btn-primary ml-5">Follow</a>
                     </div>
                 </div>
                 <!--end of user suggest card-->

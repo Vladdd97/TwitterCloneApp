@@ -120,31 +120,5 @@ public class TwitterUserController {
         return "twitterUser/userTweets";
     }
 
-    @GetMapping("/followUser")
-    public String followUser (@RequestParam(value = "username",required = true) String username , Principal principal){
-
-        TweetFollow tweetFollow = new TweetFollow();
-
-        tweetFollow.setFollower(twitterUserServiceImp.findByUsername(principal.getName()).get());
-        tweetFollow.setFollowing(twitterUserServiceImp.findByUsername(username).get());
-        tweetFollowServiceImpl.save(tweetFollow);
-
-        return "redirect:/twitterUser/profilePage";
-    }
-
-    @GetMapping("/unfollowUser")
-    public String unfollowUser (@RequestParam(value = "username",required = true) String username , Principal principal){
-
-
-        Long followerUserId = twitterUserServiceImpl.findByUsername(principal.getName()).get().getId();
-        Long followingUserId = twitterUserServiceImpl.findByUsername(username).get().getId();
-
-        Long tweetFollowId = tweetFollowServiceImpl.findByFollowingIdAndFollowerId(followingUserId,followerUserId).getId();
-
-        tweetFollowServiceImpl.deleteById(tweetFollowId);
-
-        return "redirect:/twitterUser/profilePage";
-    }
-
 
 }
