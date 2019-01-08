@@ -5,6 +5,7 @@ import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 public class Twitt {
@@ -24,6 +25,9 @@ public class Twitt {
     @Column
     @Type(type="timestamp")
     private Date createDate;
+
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
+    private List<Comment> comments;
 
 
     public Long getId() {
