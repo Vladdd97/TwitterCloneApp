@@ -4,6 +4,7 @@ package com.faf.twitterCloneApp.controllers;
 import com.faf.twitterCloneApp.models.*;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
 import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
+import com.faf.twitterCloneApp.services.EmailService;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
@@ -34,6 +35,9 @@ public class IndexController {
 
     @Autowired
     TweetFollowServiceImpl tweetFollowServiceImpl;
+
+    @Autowired
+    EmailService emailService;
 
 
     @GetMapping("/")
@@ -109,6 +113,16 @@ public class IndexController {
         model.addObject("userDetails", principal);
         model.setViewName("logoutPage");
         return model;
+    }
+
+
+    @GetMapping("/sendMail")
+    public String sendMail(){
+
+
+        emailService.sendEmail("vovakozhuhari98@gmail.com","vladbantus02@gmail.com","TwitterCloneApp","Test3");
+
+        return "index";
     }
 
 }
