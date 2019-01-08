@@ -16,6 +16,10 @@
 
     <div class="row">
 
+        <div class="col-md-2" >
+            <button type="button" class="btn btn-info">Write new Post</button>
+        </div>
+
         <!-- Blog Entries Column -->
         <div class="col-md-8">
 
@@ -33,7 +37,9 @@
                         <a href="#" class="btn btn-primary">Read More &rarr;</a>
                     </div>
                     <div class="card-footer text-muted">
-                        Posted on January 1, 2017 by
+                        <span>Posted on</span>
+                        <span th:text="${twitt.getCreateDate().toLocaleString()}" > ...</span>
+                        <span>by</span>
                         <a th:text="${userDetails.getName()}"  href="#">no user</a>
                     </div>
                 </div>

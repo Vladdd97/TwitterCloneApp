@@ -13,6 +13,7 @@ import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Component;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 @Component
 public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> {
@@ -53,11 +54,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Twitt twitt1 = new Twitt();
         twitt1.setTitle("Title 1");
         twitt1.setContent("Content 1 : Wanna sleep !");
+        twitt1.setCreateDate(new Date());
         twitt1.setTwitterUser(twitterUser1);
 
         Twitt twitt2 = new Twitt();
         twitt2.setTitle("Title 2");
         twitt2.setContent("Content 2 : just need more time for that");
+        twitt2.setCreateDate(new Date());
         twitt2.setTwitterUser(twitterUser1);
 
         twitts.add(twitt1);
@@ -94,11 +97,13 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         Twitt twitt1 = new Twitt();
         twitt1.setTitle("Abduction");
         twitt1.setContent("A thriller centered on a young man who sets out to uncover the truth about his life after finding his baby photo on a missing persons website.");
+        twitt1.setCreateDate(new Date());
         twitt1.setTwitterUser(twitterUser2);
 
         Twitt twitt2 = new Twitt();
         twitt2.setTitle("A Christmas Too Many");
         twitt2.setContent("A Hollywood legend invites her not-so-normal family home for the holidays.");
+        twitt2.setCreateDate(new Date());
         twitt2.setTwitterUser(twitterUser2);
 
         Twitt twitt3 = new Twitt();
@@ -108,6 +113,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
                 "Her home, District 12, has been reduced to rubble, and Peeta Mellark (Josh Hutcherson) is now the brainwashed " +
                 "captive of President Snow (Donald Sutherland). At the same time, Katniss also learns about a secret rebellion spreading " +
                 "throughout all of Panem -- a rebellion that will place her at the center of a plot to turn the tables on Snow. ");
+        twitt3.setCreateDate(new Date());
         twitt3.setTwitterUser(twitterUser2);
 
         twitts.add(twitt1);

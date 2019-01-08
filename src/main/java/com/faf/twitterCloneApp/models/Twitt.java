@@ -4,6 +4,7 @@ package com.faf.twitterCloneApp.models;
 import org.hibernate.annotations.Type;
 
 import javax.persistence.*;
+import java.util.Date;
 
 @Entity
 public class Twitt {
@@ -19,6 +20,10 @@ public class Twitt {
 
     @ManyToOne
     private TwitterUser twitterUser;
+
+    @Column
+    @Type(type="timestamp")
+    private Date createDate;
 
 
     public Long getId() {
@@ -51,5 +56,13 @@ public class Twitt {
 
     public void setTwitterUser(TwitterUser twitterUser) {
         this.twitterUser = twitterUser;
+    }
+
+    public Date getCreateDate() {
+        return createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 }
