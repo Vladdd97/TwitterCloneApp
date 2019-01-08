@@ -21,5 +21,7 @@ public interface TweetFollowService {
 
     Iterable<TweetFollow> findAllByFollowerUsername (String username);
 
+    TweetFollow findByFollowingIdAndFollowerId(Long followingId, Long followerId);
+
 
 }

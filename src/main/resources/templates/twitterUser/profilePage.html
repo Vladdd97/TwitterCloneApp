@@ -58,7 +58,12 @@
                 <!--end of tweet form-->
             </div>
             <div th:unless="${userInfo.getUsername().equals(authenticatedUserUsername)}">
-                <p>Here should be Follow Button</p>
+                <div th:if="${isFollowed == true}">
+                    <a th:href="@{/twitterUser/unfollowUser(username=${userInfo.getUsername()})}" class="btn btn-danger">Unfollow</a>
+                </div>
+                <div th:unless="${isFollowed == true}">
+                    <a th:href="@{/twitterUser/followUser(username=${userInfo.getUsername()})}"  class="btn btn-primary">Follow</a>
+                </div>
             </div>
 
             <!--tweet card-->

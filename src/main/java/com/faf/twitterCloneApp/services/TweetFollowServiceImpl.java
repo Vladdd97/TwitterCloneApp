@@ -36,7 +36,12 @@ public class TweetFollowServiceImpl implements TweetFollowService {
         return tweetFollowRepository.count();
     }
 
-//    @Override
+    @Override
+    public TweetFollow findByFollowingIdAndFollowerId(Long followingId, Long followerId) {
+        return tweetFollowRepository.findByFollowingIdAndFollowerId(followingId,followerId);
+    }
+
+    //    @Override
 //    public Iterable<TweetFollow> findAllByFollowingUsernameOrFollowerUsername(String following,String follower) {
 //        return tweetFollowRepository.findAllByFollowingUsernameOrFollowerUsername(following,follower);
 //    }
