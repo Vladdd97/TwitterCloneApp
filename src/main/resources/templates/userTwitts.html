@@ -9,7 +9,7 @@
 <body>
 <th:block th:include="partialViews/navbar :: navbar" ></th:block>
 <h3>User Twitts</h3>
-<h1 th:text="${username}">no user</h1>
+<h1 th:text="${userDetails.getName()}">no user</h1>
 
 <!-- Page Content -->
 <div class="container">
@@ -17,8 +17,11 @@
     <div class="row">
 
         <div class="col-md-2" >
-            <button type="button" class="btn btn-info">Write new Post</button>
+            <button type="button" class="btn btn-info">
+                <a th:href="@{/twitt/twittForm}" class="nav-link">Write new post</a>
+            </button>
         </div>
+
 
         <!-- Blog Entries Column -->
         <div class="col-md-8">
