@@ -30,6 +30,13 @@ public class TwitterUser {
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitterUser")
     private List<Authority> authorities;
 
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "following")
+    private List<TwittFollow> followings;
+
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "follower")
+    private List<TwittFollow> followers;
+
+
     public Long getId() {
         return id;
     }
@@ -76,5 +83,21 @@ public class TwitterUser {
 
     public void setAuthorities(List<Authority> authorities) {
         this.authorities = authorities;
+    }
+
+    public List<TwittFollow> getFollowings() {
+        return followings;
+    }
+
+    public void setFollowings(List<TwittFollow> followings) {
+        this.followings = followings;
+    }
+
+    public List<TwittFollow> getFollowers() {
+        return followers;
+    }
+
+    public void setFollowers(List<TwittFollow> followers) {
+        this.followers = followers;
     }
 }

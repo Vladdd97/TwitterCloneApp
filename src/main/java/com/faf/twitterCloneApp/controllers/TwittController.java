@@ -32,18 +32,21 @@ public class TwittController {
     }
 
     @PostMapping("/saveOrUpdate")
-    public String saveOrUpdate (@ModelAttribute Twitt twitt , Principal principal){
+    public String saveOrUpdate (@ModelAttribute Twitt twitt , Model model , Principal principal){
 
         twitt.setCreateDate(new Date());
         twitt.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         twittServiceImpl.save(twitt);
+
+        model.addAttribute("userDetails",principal);
         return "redirect:/usertwitts";
     }
 
 
     @GetMapping("/updateTwitt")
-    public String updateTwitt (@RequestParam("id") String id, Model model){
+    public String updateTwitt (@RequestParam("id") String id, Model model , Principal principal){
         model.addAttribute("twitt", twittServiceImpl.findById(Long.valueOf(id)));
+        model.addAttribute("userDetails",principal);
         return  "Twitt/twittFrom";
     }
 
