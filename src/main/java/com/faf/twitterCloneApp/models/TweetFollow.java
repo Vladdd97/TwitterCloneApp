@@ -1,8 +1,11 @@
 package com.faf.twitterCloneApp.models;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 public class TweetFollow {
 
@@ -17,27 +20,4 @@ public class TweetFollow {
     @ManyToOne
     private TwitterUser follower;
 
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public TwitterUser getFollowing() {
-        return following;
-    }
-
-    public void setFollowing(TwitterUser following) {
-        this.following = following;
-    }
-
-    public TwitterUser getFollower() {
-        return follower;
-    }
-
-    public void setFollower(TwitterUser follower) {
-        this.follower = follower;
-    }
 }

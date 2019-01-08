@@ -1,8 +1,11 @@
 package com.faf.twitterCloneApp.models;
 
 
+import lombok.*;
+
 import javax.persistence.*;
 
+@Data
 @Entity
 public class Authority {
 
@@ -15,27 +18,11 @@ public class Authority {
     @ManyToOne
     private TwitterUser twitterUser;
 
-    public Long getId() {
-        return id;
+    public Authority() {
     }
 
-    public void setId(Long id) {
-        this.id = id;
+    protected boolean canEqual(final Object other) {
+        return other instanceof Authority;
     }
 
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
-    }
-
-    public TwitterUser getTwitterUser() {
-        return twitterUser;
-    }
-
-    public void setTwitterUser(TwitterUser twitterUser) {
-        this.twitterUser = twitterUser;
-    }
 }
