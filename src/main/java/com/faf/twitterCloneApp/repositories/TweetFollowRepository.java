@@ -11,4 +11,6 @@ public interface TweetFollowRepository extends CrudRepository<TweetFollow,Long> 
 
     Iterable<TweetFollow> findAllByFollowerUsername (String username);
 
+    //TweetFollow findByFollowingIdAndFollowerId(Long followingId, Long followerId);
+
 }

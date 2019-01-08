@@ -44,18 +44,22 @@
 
         <div class="col-7">
 
+            <div th:if="${userInfo.getUsername().equals(authenticatedUserUsername)}">
+                <!--tweet from-->
+                <form th:action="@{/tweet/saveOrUpdate}" th:object="${newTweet}" method="post">
+                    <input type="hidden" th:field="*{id}"/>
 
-            <!--tweet from-->
-            <form th:action="@{/tweet/saveOrUpdate}" th:object="${newTweet}" method="post">
-                <input type="hidden" th:field="*{id}"/>
-
-                <div class="form-group">
-                    <label for="content">Content:</label>
-                    <input class="form-control" id="content" th:field="*{content}">
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <!--end of tweet form-->
+                    <div class="form-group">
+                        <label for="content">Content:</label>
+                        <input class="form-control" id="content" th:field="*{content}">
+                    </div>
+                    <button type="submit" class="btn btn-primary">Submit</button>
+                </form>
+                <!--end of tweet form-->
+            </div>
+            <div th:unless="${userInfo.getUsername().equals(authenticatedUserUsername)}">
+                <p>Here should be Follow Button</p>
+            </div>
 
             <!--tweet card-->
             <div th:each="tweet: ${tweets}" class="card mx-1 my-4">
@@ -66,18 +70,22 @@
                         <span th:text="${tweet.getCreateDate().toLocaleString()}"> ...</span>
                         <span>by</span>
                         <span class="text-primary" th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
-                        <div th:if="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}"
+                        <div th:if="${authenticatedUserUsername.equals(tweet.getTwitterUser().getUsername())}"
                              class="float-right">
                             <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="mr-2">
-                                <i class="material-icons" style="font-size:24px;color:dodgerblue; cursor: pointer;" title="Edit Tweet">edit</i>
+                                <i class="material-icons" style="font-size:24px;color:dodgerblue; cursor: pointer;"
+                                   title="Edit Tweet">edit</i>
                             </a>
                             <a th:href="@{/tweet/deleteTweet(id=${tweet.getId()})}" class="text-danger">
-                                <i class="material-icons" style="font-size:24px;color:black; cursor: pointer;" title="Delete Tweet" >delete</i>
+                                <i class="material-icons" style="font-size:24px;color:black; cursor: pointer;"
+                                   title="Delete Tweet">delete</i>
                             </a>
                         </div>
-                        <div th:unless="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}"  class="float-right">
+                        <div th:unless="${authenticatedUserUsername.equals(tweet.getTwitterUser().getUsername())}"
+                             class="float-right">
                             <a th:href="@{/tweet/retweet(tweetId=${tweet.getId()})}">
-                                <i class="fa fa-share-square-o" style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
+                                <i class="fa fa-share-square-o"
+                                   style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
                             </a>
                         </div>
                     </div>
