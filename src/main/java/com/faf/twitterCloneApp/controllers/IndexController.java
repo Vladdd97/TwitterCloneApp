@@ -84,6 +84,9 @@ public class IndexController {
         authorities.add(authority);
         twitterUser.setAuthorities(authorities);
 
+        twitterUser.getTwitterUserInfo().setTwitterUser(twitterUser);
+
+
         twitterUserServiceImpl.save(twitterUser);
         return "redirect:/loginPage";
     }
@@ -111,17 +114,19 @@ public class IndexController {
     public ModelAndView logoutPage(Principal principal) {
         ModelAndView model = new ModelAndView();
 
-        model.addObject("userDetails", principal);
+        model.addObject("authenticatedUserUsername",principal.getName());
+
         model.setViewName("logoutPage");
         return model;
     }
 
 
     @GetMapping("/messagePage")
-    public String sendMail(@RequestParam(value = "message",required = true) String message  ,Model model){
+    public String sendMail(@RequestParam(value = "message",required = true) String message  ,Model model, Principal principal){
 
 
         model.addAttribute("message",message);
+        model.addAttribute("authenticatedUserUsername",principal.getName());
 
         return "messagePage";
     }

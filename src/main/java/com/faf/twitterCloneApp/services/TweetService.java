@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.services;
 
 import com.faf.twitterCloneApp.models.Tweet;
+import com.faf.twitterCloneApp.models.util.TweetType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
@@ -23,7 +24,7 @@ public interface TweetService {
 
     Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
 
-    Optional<Tweet> findByParentTweetId(Long parentTweetId);
+    Optional<Tweet> findByParentTweetIdAndTypeAndTwitterUserUsername (Long parentTweetId, TweetType tweetType, String username);
 
     List<Tweet> findTopTweetsByNumberOfReactions(Integer pageNumber, Integer pageSize);
 

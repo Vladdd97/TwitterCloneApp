@@ -60,7 +60,9 @@ public class TweetController {
     public String retweet (@RequestParam(value = "tweetId",required = true) Long tweetId , Principal principal){
 
 
-        if (!tweetServiceImpl.findByParentTweetId(tweetId).isPresent()) {
+        if (!tweetServiceImpl.findByParentTweetIdAndTypeAndTwitterUserUsername(tweetId,TweetType.Retweet,principal.getName()).isPresent() ) {
+
+            Long parentTweetId;
 
             Tweet retweetedTweet = tweetServiceImpl.findById(tweetId);
             Tweet newTweet = new Tweet();
@@ -68,7 +70,15 @@ public class TweetController {
             newTweet.setCreateDate(new Date());
             newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
             newTweet.setType(TweetType.Retweet);
-            newTweet.setParentTweetId(tweetId);
+
+            if (retweetedTweet.getParentTweetId() != null){
+                parentTweetId = retweetedTweet.getParentTweetId();
+            }
+            else{
+                parentTweetId = tweetId;
+            }
+
+            newTweet.setParentTweetId(parentTweetId);
             tweetServiceImpl.save(newTweet);
             return "redirect:/twitterUser/profilePage";
 
@@ -79,5 +89,38 @@ public class TweetController {
         }
 
     }
+
+
+    @GetMapping("/bookmark")
+    public String bookmark (@RequestParam(value = "tweetId",required = true) Long tweetId , Principal principal){
+
+        if (!tweetServiceImpl.findByParentTweetIdAndTypeAndTwitterUserUsername(tweetId,TweetType.Bookmark,principal.getName()).isPresent() ) {
+
+            Long parentTweetId;
+
+            Tweet bookmarkedTweet = tweetServiceImpl.findById(tweetId);
+            Tweet newTweet = new Tweet();
+            newTweet.setContent(bookmarkedTweet.getContent());
+            newTweet.setCreateDate(new Date());
+            newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
+            newTweet.setType(TweetType.Bookmark);
+
+            if (bookmarkedTweet.getParentTweetId() != null){
+                parentTweetId = bookmarkedTweet.getParentTweetId();
+            }
+            else{
+                parentTweetId = tweetId;
+            }
+            newTweet.setParentTweetId(parentTweetId);
+            tweetServiceImpl.save(newTweet);
+            return "redirect:/twitterUser/bookmarkPage";
+
+        }
+        else {
+            String message = "You have bookmarked this tweet already! Check you profile page! ";
+            return "redirect:/messagePage?message="+message;
+        }
+    }
+
 
 }

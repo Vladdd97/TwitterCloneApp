@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.repositories;
 
 import com.faf.twitterCloneApp.models.Tweet;
+import com.faf.twitterCloneApp.models.util.TweetType;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.Query;
@@ -16,7 +17,7 @@ public interface TweetRepository extends CrudRepository<Tweet,Long> {
 
     Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
 
-    Optional<Tweet> findByParentTweetId(Long parentTweetId);
+    Optional<Tweet> findByParentTweetIdAndTypeAndTwitterUserUsername (Long parentTweetId, TweetType tweetType, String username);
 
     @Query("SELECT t FROM Tweet as t left join t.reactions as r group by t order by count(r.id) desc")
 //    @Query(value = "" +

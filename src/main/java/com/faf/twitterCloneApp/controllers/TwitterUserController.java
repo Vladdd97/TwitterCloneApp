@@ -82,5 +82,11 @@ public class TwitterUserController {
 
     }
 
+    @GetMapping("/bookmarkPage")
+    public String bookmarkPage(Model model, Principal principal) {
+
+        return "twitterUser/bookmarkPage";
+    }
+
 
 }

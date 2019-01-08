@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.services;
 
 import com.faf.twitterCloneApp.models.Tweet;
+import com.faf.twitterCloneApp.models.util.TweetType;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -56,9 +57,10 @@ public class TweetServiceImpl implements TweetService {
         return tweetRepository.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
     }
 
+
     @Override
-    public Optional<Tweet> findByParentTweetId(Long parentTweetId) {
-        return tweetRepository.findByParentTweetId(parentTweetId);
+    public Optional<Tweet> findByParentTweetIdAndTypeAndTwitterUserUsername(Long parentTweetId, TweetType tweetType, String username) {
+        return tweetRepository.findByParentTweetIdAndTypeAndTwitterUserUsername(parentTweetId,tweetType,username);
     }
 
     @Override
