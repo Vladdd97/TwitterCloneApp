@@ -46,7 +46,7 @@ public class TweetController {
     public String updateTwitt (@RequestParam("id") String id, Model model , Principal principal){
         model.addAttribute("tweet", tweetServiceImpl.findById(Long.valueOf(id)));
         model.addAttribute("userDetails",principal);
-        return  "tweet/tweetFrom";
+        return  "tweet/tweetForm";
     }
 
 

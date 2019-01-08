@@ -51,8 +51,8 @@
                         <span>by</span>
                         <span class="text-primary"  th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
                         <div th:if="${username == null}">
-                            <a th:href="@{/tweet/updateTwitt(id=${tweet.getId()})}" class="text-primary">Modify</a>
-                            <a th:href="@{/tweet/deleteTwitt(id=${tweet.getId()})}" class="text-danger">Delete</a>
+                            <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="text-primary">Modify</a>
+                            <a th:href="@{/tweet/deleteTweet(id=${tweet.getId()})}" class="text-danger">Delete</a>
                         </div>
                     </div>
                     <p  th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
