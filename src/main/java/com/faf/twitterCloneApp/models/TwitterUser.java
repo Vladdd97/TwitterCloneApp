@@ -1,8 +1,6 @@
 package com.faf.twitterCloneApp.models;
 
 
-import org.hibernate.validator.constraints.UniqueElements;
-
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
@@ -25,16 +23,16 @@ public class TwitterUser {
     private Boolean enabled;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitterUser")
-    private List<Twitt> twitts;
+    private List<Tweet> tweets;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitterUser")
     private List<Authority> authorities;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "following")
-    private List<TwittFollow> followings;
+    private List<TweetFollow> followings;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "follower")
-    private List<TwittFollow> followers;
+    private List<TweetFollow> followers;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitterUser")
     private List<Comment> comments;
@@ -76,12 +74,12 @@ public class TwitterUser {
         this.enabled = enabled;
     }
 
-    public List<Twitt> getTwitts() {
-        return twitts;
+    public List<Tweet> getTweets() {
+        return tweets;
     }
 
-    public void setTwitts(List<Twitt> twitts) {
-        this.twitts = twitts;
+    public void setTweets(List<Tweet> tweets) {
+        this.tweets = tweets;
     }
 
     public List<Authority> getAuthorities() {
@@ -92,19 +90,19 @@ public class TwitterUser {
         this.authorities = authorities;
     }
 
-    public List<TwittFollow> getFollowings() {
+    public List<TweetFollow> getFollowings() {
         return followings;
     }
 
-    public void setFollowings(List<TwittFollow> followings) {
+    public void setFollowings(List<TweetFollow> followings) {
         this.followings = followings;
     }
 
-    public List<TwittFollow> getFollowers() {
+    public List<TweetFollow> getFollowers() {
         return followers;
     }
 
-    public void setFollowers(List<TwittFollow> followers) {
+    public void setFollowers(List<TweetFollow> followers) {
         this.followers = followers;
     }
 

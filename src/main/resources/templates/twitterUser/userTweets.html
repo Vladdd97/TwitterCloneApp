@@ -42,40 +42,40 @@
 
         <!--tweet card-->
         <div class="col-7" >
-            <div th:each="twitt: ${userTwitts}"  class="card mx-1 mb-5" >
+            <div th:each="tweet: ${userTweets}"  class="card mx-1 mb-5" >
                 <div class="card-body">
 
                     <div class="card-title text-muted">
                         <span>Posted on</span>
-                        <span th:text="${twitt.getCreateDate().toLocaleString()}"> ...</span>
+                        <span th:text="${tweet.getCreateDate().toLocaleString()}"> ...</span>
                         <span>by</span>
-                        <span class="text-primary"  th:text="${twitt.getTwitterUser().getUsername()}">no user</span>
+                        <span class="text-primary"  th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
                         <div th:if="${username == null}">
-                            <a th:href="@{/twitt/updateTwitt(id=${twitt.getId()})}" class="text-primary">Modify</a>
-                            <a th:href="@{/twitt/deleteTwitt(id=${twitt.getId()})}" class="text-danger">Delete</a>
+                            <a th:href="@{/tweet/updateTwitt(id=${tweet.getId()})}" class="text-primary">Modify</a>
+                            <a th:href="@{/tweet/deleteTwitt(id=${tweet.getId()})}" class="text-danger">Delete</a>
                         </div>
                     </div>
-                    <p  th:text="${twitt.getContent()}" class="card-text">Content of the Tweet</p>
+                    <p  th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
                 </div>
 
                 <img class="card-img-bottom" src="http://placehold.it/750x300" alt="Card image" style="width:100%">
 
                 <div class="card-footer py-1">
                     <div class="text-primary float-left mt-3" data-toggle="collapse"
-                         th:attr="data-target='#comment'+${twitt.getId()}" style="cursor: pointer;">Comments
+                         th:attr="data-target='#comment'+${tweet.getId()}" style="cursor: pointer;">Comments
                     </div>
 
                     <div class="float-right mt-2">
-                        <a th:href="@{/reaction/saveOrUpdate(username = ${twitt.getTwitterUser().getUsername()} ,twittId=${twitt.getId()})}">
+                        <a th:href="@{/reaction/saveOrUpdate(username = ${tweet.getTwitterUser().getUsername()} ,tweetId=${tweet.getId()})}">
                             <i class="fa fa-heart" style="font-size:32px;color:#f44336"></i>
                         </a>
-                        <span th:text="${twitt.getReactions().size()}" >number</span>
+                        <span th:text="${tweet.getReactions().size()}" >number</span>
                     </div>
                     <br>
                     <br>
-                    <div th:id="'comment'+${twitt.getId()}" class="collapse">
+                    <div th:id="'comment'+${tweet.getId()}" class="collapse">
 
-                        <div th:each="comment:${twitt.getComments()}" class="card my-2">
+                        <div th:each="comment:${tweet.getComments()}" class="card my-2">
                             <div class="card-header text-muted">
                                 <span>Posted on</span>
                                 <span th:text="${comment.getCreateDate().toLocaleString()}">no user</span>
@@ -89,7 +89,7 @@
 
 
                         <div class="container">
-                            <form th:action="@{/comment/saveOrUpdate(twittId=${twitt.getId()} , username=${twitt.getTwitterUser().getUsername()})}"
+                            <form th:action="@{/comment/saveOrUpdate(tweetId=${tweet.getId()} , username=${tweet.getTwitterUser().getUsername()})}"
                                   th:object="${newComment}" method="post">
                                 <input type="hidden" th:field="*{id}"/>
                                 <div class="form-group">

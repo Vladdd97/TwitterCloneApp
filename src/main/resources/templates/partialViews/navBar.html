@@ -23,7 +23,7 @@
                         <a th:href="@{/twitterUser/userDetails}" class="nav-link">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/twitterUser/userTwitts}" class="nav-link">Twitts</a>
+                        <a th:href="@{/twitterUser/userTweets}" class="nav-link">Tweets</a>
                     </li>
                     <li th:if ="${userDetails != null}"  class="nav-item">
                         <a  th:href="@{/twitterUser/userDetails}"  th:text="${userDetails.getName()}" class="nav-link">userName</a>

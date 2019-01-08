@@ -1,7 +1,6 @@
 package com.faf.twitterCloneApp.models;
 
 import javax.persistence.*;
-import javax.swing.text.StyledEditorKit;
 
 
 @Entity
@@ -18,7 +17,7 @@ public class Reaction {
     private String likedByUser;
 
     @ManyToOne
-    private Twitt twitt;
+    private Tweet tweet;
 
     public Long getId() {
         return id;
@@ -44,11 +43,11 @@ public class Reaction {
         this.likedByUser = likedByUser;
     }
 
-    public Twitt getTwitt() {
-        return twitt;
+    public Tweet getTweet() {
+        return tweet;
     }
 
-    public void setTwitt(Twitt twitt) {
-        this.twitt = twitt;
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
     }
 }

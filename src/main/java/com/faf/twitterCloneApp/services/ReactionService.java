@@ -16,5 +16,5 @@ public interface ReactionService {
 
     Long count();
 
-    Optional<Reaction> findByTwittIdAndLikedByUser (Long twittId , String username);
+    Optional<Reaction> findByTweetIdAndLikedByUser (Long tweetId , String username);
 }

@@ -31,7 +31,7 @@
 
 
             <td>
-            <a th:href="@{/twitterUser/userTwitts(username=${follower.getFollower().getUsername()})}"  >
+            <a th:href="@{/twitterUser/userTweets(username=${follower.getFollower().getUsername()})}"  >
             <button  th:text="${follower.getFollower().getUsername()}"  class="btn btn-info">username</button>
             </a>
             </td>

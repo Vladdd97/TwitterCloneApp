@@ -39,7 +39,7 @@ public class ReactionServiceImpl implements ReactionService{
     }
 
     @Override
-    public Optional<Reaction> findByTwittIdAndLikedByUser(Long twittId, String username) {
-        return reactionRepository.findByTwittIdAndLikedByUser(twittId,username);
+    public Optional<Reaction> findByTweetIdAndLikedByUser(Long tweetId, String username) {
+        return reactionRepository.findByTweetIdAndLikedByUser(tweetId,username);
     }
 }

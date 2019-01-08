@@ -1,9 +1,9 @@
 package com.faf.twitterCloneApp.controllers;
 
 import com.faf.twitterCloneApp.models.Comment;
-import com.faf.twitterCloneApp.models.Twitt;
-import com.faf.twitterCloneApp.services.TwittFollowServiceImpl;
-import com.faf.twitterCloneApp.services.TwittService;
+import com.faf.twitterCloneApp.models.Tweet;
+import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
+import com.faf.twitterCloneApp.services.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,36 +18,36 @@ import java.security.Principal;
 public class TwitterUserController {
 
     @Autowired
-    TwittService twittServiceImpl;
+    TweetService tweetServiceImpl;
 
     @Autowired
-    TwittFollowServiceImpl twittFollowServiceImpl;
+    TweetFollowServiceImpl tweetFollowServiceImpl;
 
     @GetMapping("/userDetails")
     public String userDetails (Model model , Principal principal){
 
         model.addAttribute("userDetails",principal);
-        model.addAttribute("followers", twittFollowServiceImpl.findAllByFollowingUsername(principal.getName()));
-        model.addAttribute("followings", twittFollowServiceImpl.findAllByFollowerUsername(principal.getName()));
+        model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(principal.getName()));
+        model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(principal.getName()));
         return "twitterUser/userDetails";
     }
 
-    @GetMapping("/userTwitts")
-    public String userTwitts (@RequestParam(value = "username",required = false) String username , Model model , Principal principal){
-        Iterable<Twitt> twitts;
+    @GetMapping("/userTweets")
+    public String userTweets (@RequestParam(value = "username",required = false) String username , Model model , Principal principal){
+        Iterable<Tweet> tweets;
 
         if ( username == null){
-            twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
+            tweets = tweetServiceImpl.findAllByTwitterUserUsername(principal.getName());
         }
         else{
-            twitts = twittServiceImpl.findAllByTwitterUserUsername(username);
+            tweets = tweetServiceImpl.findAllByTwitterUserUsername(username);
             model.addAttribute("username",username);
         }
 
-        model.addAttribute("userTwitts",twitts);
+        model.addAttribute("userTweets",tweets);
         model.addAttribute("userDetails",principal);
         model.addAttribute("newComment",new Comment());
-        return "twitterUser/userTwitts";
+        return "twitterUser/userTweets";
     }
 
 
