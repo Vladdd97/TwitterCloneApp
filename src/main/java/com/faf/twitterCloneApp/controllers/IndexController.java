@@ -120,9 +120,9 @@ public class IndexController {
     public String sendMail(){
 
 
-        emailService.sendEmail("vovakozhuhari98@gmail.com","vladbantus02@gmail.com","TwitterCloneApp","Test3");
+        emailService.sendEmail("vladislav.bantus@faf.utm.md","vladbantus02@gmail.com","TwitterCloneApp","Test5");
 
-        return "index";
+        return "redirect:/twitterUser/homePage";
     }
 
 }

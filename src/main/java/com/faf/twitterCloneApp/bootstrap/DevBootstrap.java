@@ -52,6 +52,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             twitterUser1.setPassword("$2a$10$eET7zB2oNuhzsEDUMmy3L.VHvZ/N.NwbD4T5IKPl6cPZ0WNCAuhFG"); //vasile
             twitterUser1.setEnabled(true);
 
+            TwitterUserInfo twitterUserInfo = new TwitterUserInfo();
+            twitterUserInfo.setGender("M");
+            twitterUserInfo.setEmail("vladislav.bantus@faf.utm.md");
+            twitterUserInfo.setTwitterUser(twitterUser1);
+            twitterUser1.setTwitterUserInfo(twitterUserInfo);
+
 
             ArrayList<Tweet> tweets = new ArrayList<>();
 

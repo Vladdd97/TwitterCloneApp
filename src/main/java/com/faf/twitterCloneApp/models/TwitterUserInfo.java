@@ -2,6 +2,7 @@ package com.faf.twitterCloneApp.models;
 
 
 import lombok.*;
+import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
@@ -21,9 +22,20 @@ public class TwitterUserInfo {
 
     private String userInfo;
 
+    @ColumnDefault("false")
+    private Boolean isEmailNotificationEnabled;
+
     @OneToOne
     private TwitterUser twitterUser;
 
     public TwitterUserInfo(){}
+
+    // set the default value of columns
+    @PrePersist
+    public void prePersist(){
+        if ( this.isEmailNotificationEnabled == null){
+            this.isEmailNotificationEnabled = false;
+        }
+    }
 
 }
