@@ -52,7 +52,7 @@ public class TweetController {
     @GetMapping("/deleteTweet")
     public String deleteTwitt (@RequestParam("id") String id){
         tweetServiceImpl.deleteById(Long.valueOf(id));
-        return  "redirect:/twitterUser/userTweets";
+        return  "redirect:/";
     }
 
 }
