@@ -42,19 +42,12 @@ public class IndexController {
 
     @GetMapping("/")
     public String index(Model model, Principal principal) {
-        int pageNumber = 0;
-        int pageSize = 10;
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String password = "dev";
 //        System.out.println("password : " + password);
 //        System.out.println("PASSWORD : " + bCryptPasswordEncoder.encode(password));
         if (principal != null) {
-            model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
-            model.addAttribute("newTweet", new Tweet());
-            model.addAttribute("newComment", new Comment());
-            model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber, pageSize));
-            model.addAttribute("suggestFollowUsers", twitterUserServiceImpl.findSuggestFollowUsers(Long.valueOf(128), pageNumber, pageSize));
-            return "index";
+            return "redirect:/twitterUser/homePage";
         } else {
             return "redirect:/loginPage";
         }
