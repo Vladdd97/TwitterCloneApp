@@ -24,38 +24,44 @@ public class TweetFollowController {
     TwitterUserService twitterUserServiceImpl;
 
 
+    @GetMapping("/connections")
+    public String connections(@RequestParam(value = "username", required = false) String username,
+                              @RequestParam(value = "connectionType", required = false) String connectionType,
+                              Model model, Principal principal) {
 
-
-    @GetMapping("/followers")
-    public String followers(@RequestParam(value = "username", required = false) String username, Model model, Principal principal) {
-
-        if ( username == null){
+        if (username == null) {
             username = principal.getName();
+        }
+
+        switch (connectionType) {
+            case "followers": {
+                model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(username));
+                break;
+            }
+            case "followings": {
+                model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(username));
+                break;
+            }
+            case "all": {
+                model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(username));
+                model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(username));
+                break;
+            }
+            default: {
+                model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(username));
+                model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(username));
+                break;
+            }
         }
 
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
         model.addAttribute("authenticatedUserUsername", principal.getName());
-        model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(username));
         return "tweetFollow/tweetFollow";
     }
-
-    @GetMapping("/followings")
-    public String followings(@RequestParam(value = "username", required = false) String username, Model model, Principal principal) {
-
-        if ( username == null){
-            username = principal.getName();
-        }
-
-        model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
-        model.addAttribute("authenticatedUserUsername", principal.getName());
-        model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(username));
-        return "tweetFollow/tweetFollow";
-    }
-
 
 
     @GetMapping("/followUser")
-    public String followUser (@RequestParam(value = "username",required = true) String username , Principal principal){
+    public String followUser(@RequestParam(value = "username", required = true) String username, Principal principal) {
 
         TweetFollow tweetFollow = new TweetFollow();
 
@@ -67,19 +73,18 @@ public class TweetFollowController {
     }
 
     @GetMapping("/unfollowUser")
-    public String unfollowUser (@RequestParam(value = "username",required = true) String username , Principal principal){
+    public String unfollowUser(@RequestParam(value = "username", required = true) String username, Principal principal) {
 
 
         Long followerUserId = twitterUserServiceImpl.findByUsername(principal.getName()).get().getId();
         Long followingUserId = twitterUserServiceImpl.findByUsername(username).get().getId();
 
-        Long tweetFollowId = tweetFollowServiceImpl.findByFollowingIdAndFollowerId(followingUserId,followerUserId).getId();
+        Long tweetFollowId = tweetFollowServiceImpl.findByFollowingIdAndFollowerId(followingUserId, followerUserId).getId();
 
         tweetFollowServiceImpl.deleteById(tweetFollowId);
 
         return "redirect:/twitterUser/profilePage";
     }
-
 
 
 }

@@ -13,31 +13,8 @@
 <br>
 
 <div class="container">
-    <div th:if="${followers == null}">
+    <div th:if="${followers != null}">
 
-        <h2>Followings</h2>
-        <table class="table table-dark table-striped">
-            <thead>
-            <tr>
-                <th>Followings</th>
-            </tr>
-            </thead>
-
-            <tbody>
-            <tr th:each="following : ${followings}">
-
-                <td>
-                    <a th:href="@{/twitterUser/profilePage(username=${following.getFollowing().getUsername()})}"  >
-                        <button  th:text="${following.getFollowing().getUsername()}"  class="btn btn-primary">username</button>
-                    </a>
-                </td>
-
-            </tr>
-            </tbody>
-        </table>
-
-    </div>
-    <div th:unless="${followers == null}">
 
         <h2>Followers</h2>
         <table class="table table-dark table-striped">
@@ -57,6 +34,30 @@
                         <button  th:text="${follower.getFollower().getUsername()}"  class="btn btn-info">username</button>
                     </a>
                 </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    <div th:if="${followings != null}">
+
+        <h2>Followings</h2>
+        <table class="table table-dark table-striped">
+            <thead>
+            <tr>
+                <th>Followings</th>
+            </tr>
+            </thead>
+
+            <tbody>
+            <tr th:each="following : ${followings}">
+
+                <td>
+                    <a th:href="@{/twitterUser/profilePage(username=${following.getFollowing().getUsername()})}"  >
+                        <button  th:text="${following.getFollowing().getUsername()}"  class="btn btn-primary">username</button>
+                    </a>
+                </td>
+
             </tr>
             </tbody>
         </table>

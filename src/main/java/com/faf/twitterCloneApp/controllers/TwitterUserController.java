@@ -86,13 +86,6 @@ public class TwitterUserController {
 
 
 
-
-
-
-
-
-
-
     @GetMapping("/userDetails")
     public String userDetails (Model model , Principal principal){
 
@@ -102,23 +95,6 @@ public class TwitterUserController {
         return "twitterUser/userDetails";
     }
 
-    @GetMapping("/userTweets")
-    public String userTweets (@RequestParam(value = "username",required = false) String username , Model model , Principal principal){
-        Iterable<Tweet> tweets;
-
-        if ( username == null){
-            tweets = tweetServiceImpl.findAllByTwitterUserUsername(principal.getName());
-        }
-        else{
-            tweets = tweetServiceImpl.findAllByTwitterUserUsername(username);
-            model.addAttribute("username",username);
-        }
-
-        model.addAttribute("userTweets",tweets);
-        model.addAttribute("userDetails",principal);
-        model.addAttribute("newComment",new Comment());
-        return "twitterUser/userTweets";
-    }
 
 
 }

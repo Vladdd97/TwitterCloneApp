@@ -26,13 +26,18 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <!--count how many users have this user as follower one-->
-                        <a th:href="@{/tweetFollow/followings(username=${userInfo.getUsername()})}" >Following</a>
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followings')}" >Following</a>
                         <span th:text="${userInfo.getFollowers().size()}"></span>
                     </li>
                     <li class="list-group-item">
                         <!--count how many users have this user as following one-->
-                        <a th:href="@{/tweetFollow/followers(username=${userInfo.getUsername()})}" >Followers</a>
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followers')}" >Followers</a>
                         <span th:text="${userInfo.getFollowings().size()}"></span>
+                    </li>
+                    <li class="list-group-item">
+                        <!--count how many users have this user as following one-->
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='all')}" >See all connections</a>
+                        <span th:text="${userInfo.getFollowings().size()}+${userInfo.getFollowers().size()}"></span>
                     </li>
                 </ul>
                 <div class="card-body">
