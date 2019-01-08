@@ -27,7 +27,7 @@ public class TweetController {
 
         model.addAttribute("tweet",new Tweet());
         model.addAttribute("userDetails",principal);
-        return "tweet/tweetFrom";
+        return "tweet/tweetForm";
     }
 
     @PostMapping("/saveOrUpdate")
@@ -37,8 +37,7 @@ public class TweetController {
         tweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         tweetServiceImpl.save(tweet);
 
-        model.addAttribute("userDetails",principal);
-        return "redirect:/twitterUser/userTweets";
+        return "redirect:/";
     }
 
 

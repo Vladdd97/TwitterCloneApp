@@ -54,7 +54,7 @@
         <tr th:each="following : ${followings}">
 
             <td>
-                <a th:href="@{/twitterUser/userTwitts(username=${following.getFollowing().getUsername()})}"  >
+                <a th:href="@{/twitterUser/userTweets(username=${following.getFollowing().getUsername()})}"  >
                     <button  th:text="${following.getFollowing().getUsername()}"  class="btn btn-primary">username</button>
                 </a>
             </td>
