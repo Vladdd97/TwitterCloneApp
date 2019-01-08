@@ -24,12 +24,34 @@ import javax.sql.DataSource;
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 
 
+    @Autowired
+    private DataSource dataSource;
+
+
+    @Override
+    public void configure(AuthenticationManagerBuilder auth) throws Exception {
+        // auth.userDetailsService(userDetailsService).passwordEncoder(new BCryptPasswordEncoder() );
+        auth.jdbcAuthentication().dataSource(dataSource).passwordEncoder(new BCryptPasswordEncoder())
+                .usersByUsernameQuery("select username , password , enabled from twitter_user where username=?")
+                .authoritiesByUsernameQuery("select username , role from twitter_user inner join authority on twitter_user.id = authority.twitter_user_id where username=?");
+    }
+
+
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
+//        http
+//                .authorizeRequests()
+//                .antMatchers("/*").permitAll();
+
         http
                 .authorizeRequests()
-                .antMatchers("/*").permitAll();
+                .antMatchers("/userdetails*").hasRole("USER")
+                .antMatchers("/*").permitAll()
+                .and().formLogin().permitAll()
+                .and().logout().permitAll();
+
+
     }
 
 }
