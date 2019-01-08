@@ -12,7 +12,7 @@ public class CommentServiceImpl implements CommentService {
     CommentRepository commentRepository;
 
     @Override
-    public Iterable<Comment> getAll() {
+    public Iterable<Comment> findAll() {
         return commentRepository.findAll();
     }
 

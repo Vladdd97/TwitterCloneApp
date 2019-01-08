@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface TwitterUserService {
 
-    Iterable<TwitterUser> getAll();
+    Iterable<TwitterUser> findAll();
 
     TwitterUser findById (Long id);
 

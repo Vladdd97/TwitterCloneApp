@@ -12,7 +12,7 @@ public class TweetServiceImpl implements TweetService {
     private TweetRepository tweetRepository;
 
     @Override
-    public Iterable<Tweet> getAll() {
+    public Iterable<Tweet> findAll() {
         return tweetRepository.findAll();
     }
 

@@ -6,7 +6,7 @@ import java.util.Optional;
 
 public interface ReactionService {
 
-    Iterable<Reaction> getAll();
+    Iterable<Reaction> findAll();
 
     Reaction findById (Long id);
 

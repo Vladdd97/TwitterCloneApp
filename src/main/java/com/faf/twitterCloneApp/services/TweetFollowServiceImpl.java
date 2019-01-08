@@ -12,7 +12,7 @@ public class TweetFollowServiceImpl implements TweetFollowService {
     TweetFollowRepository tweetFollowRepository;
 
     @Override
-    public Iterable<TweetFollow> getAll() {
+    public Iterable<TweetFollow> findAll() {
         return tweetFollowRepository.findAll();
     }
 

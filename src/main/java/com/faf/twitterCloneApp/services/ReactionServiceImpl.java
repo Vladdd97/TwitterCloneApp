@@ -14,7 +14,7 @@ public class ReactionServiceImpl implements ReactionService{
     private ReactionRepository reactionRepository;
 
     @Override
-    public Iterable<Reaction> getAll() {
+    public Iterable<Reaction> findAll() {
         return reactionRepository.findAll();
     }
 

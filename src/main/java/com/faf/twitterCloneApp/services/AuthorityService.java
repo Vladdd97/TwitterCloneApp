@@ -4,7 +4,7 @@ import com.faf.twitterCloneApp.models.Authority;
 
 public interface AuthorityService {
 
-    Iterable<Authority> getAll();
+    Iterable<Authority> findAll();
 
     Authority findById (Long id);
 
