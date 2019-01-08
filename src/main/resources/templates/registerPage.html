@@ -1,48 +1,124 @@
 <!DOCTYPE html>
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
+
 <head>
-<title>index</title>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Register</title>
+
+    <!-- Bootstrap core CSS -->
+    <link rel="stylesheet" th:href="@{/public/bootstrap/css/bootstrap.min.css}">
+
+    <!-- Custom fonts for this template -->
+    <link href="https://fonts.googleapis.com/css?family=Saira+Extra+Condensed:500,700" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Muli:400,400i,800,800i" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.5.0/css/all.css" integrity="sha384-B4dIYHKNBt8Bc12p+WXckhzcICo0wtJAoU8YZTY5qE0Id1GSseTk6S+L3BlXeVIU" crossorigin="anonymous">
+
+    <!-- Custom styles for this template -->
+    <link rel="stylesheet" th:href="@{/public/css/style.css}">
 </head>
+
 <body>
-
-
-<th:block th:include="partialViews/navbar :: navbar" ></th:block>
-
-<h3>Create new Tweet Controller</h3>
-
-
-
-
-<div class="container">
-    <h3>RegisterPage</h3>
-    <form   th:action="@{/registerNewUser}" th:object="${newTwitterUser}" method="post">
-        <input type="hidden" th:field="*{id}"/>
-
-        <div class="form-group">
-            <label for="username">username:</label>
-            <input class="form-control" id="username" th:field="*{username}" >
+<div class="row p-0" id="loginPage">
+    <div class="d-none d-lg-block col-lg-7" style="height: 100vh; background-color: #BD5D38;">
+        <div class="benefits">
+            <span style="font-size: 30px; color: white;">
+                <i class="fab fa-connectdevelop" style="width: 30px;"></i><p class="benefit" style="display: inline-block">Connect with everyone.</p>
+            </span> <br>
+            <span style="font-size: 30px; color: white;">
+                <i class="fas fa-user-friends" style="width: 30px;"></i><p class="benefit" style="display: inline-block">Check for your friend's news.</p>
+            </span> <br>
+            <span style="font-size: 30px; color: white;">
+                <i class="fas fa-heartbeat" style="width: 30px;"></i><p class="benefit" style="display: inline-block">Share every cool moment here.</p>
+            </span>
         </div>
+    </div>
 
+    <div class="col-lg-5">
+        <form method="post" th:action="@{/registerNewUser}" th:object="${newTwitterUser}" class="login-form">
+            <input type="hidden" th:field="*{id}"/>
 
-        <div class="form-group">
-            <label for="email">Email:</label>
-            <input th:field="*{twitterUserInfo.email}" type="email" class="form-control" id="email" placeholder="Enter email" name="email">
-        </div>
+            <h2 class="loginTitle">Title</h2>
 
-        <div class="form-group">
-            <label for="pwd">Password:</label>
-            <input th:field="*{password}"  type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">
-        </div>
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input class="form-control" id="username" placeholder="Username" th:field="*{username}">
+            </div>
 
+            <div class="form-group">
+                <label for="email">Email address</label>
+                <input type="email" class="form-control" id="email" aria-describedby="emailHelp" placeholder="Enter email" th:field="*{twitterUserInfo.email}">
+            </div>
 
-        <button type="submit" class="btn btn-primary">Submit</button>
-    </form>
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password" class="form-control" id="password" placeholder="Password" th:field="*{password}">
+            </div>
+            <!--<div class="form-group">-->
+            <!--<label for="exampleInputPassword1">Confirm Password</label>-->
+            <!--<input type="password" class="form-control" id="confirm-password" placeholder="Confirm Password">-->
+            <!--</div>-->
+            <button type="submit" class="btn btn-primary">REGISTER</button>
+        </form>
+    </div>
 </div>
-
 
 <th:block th:include="partialViews/footer :: footer"></th:block>
 
 </body>
+
 </html>
+
+
+
+<!--<!DOCTYPE html>-->
+<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
+<!--<head>-->
+<!--<title>index</title>-->
+<!--<meta charset="utf-8">-->
+<!--<meta name="viewport" content="width=device-width, initial-scale=1">-->
+<!--</head>-->
+<!--<body>-->
+
+
+<!--<th:block th:include="partialViews/navbar :: navbar" ></th:block>-->
+
+<!--<h3>Create new Tweet Controller</h3>-->
+
+
+
+
+<!--<div class="container">-->
+<!--<h3>RegisterPage</h3>-->
+<!--<form   th:action="@{/registerNewUser}" th:object="${newTwitterUser}" method="post">-->
+<!--<input type="hidden" th:field="*{id}"/>-->
+
+<!--<div class="form-group">-->
+<!--<label for="username">username:</label>-->
+<!--<input class="form-control" id="username" th:field="*{username}" >-->
+<!--</div>-->
+
+
+<!--<div class="form-group">-->
+<!--<label for="email">Email:</label>-->
+<!--<input th:field="*{twitterUserInfo.email}" type="email" class="form-control" id="email" placeholder="Enter email" name="email">-->
+<!--</div>-->
+
+<!--<div class="form-group">-->
+<!--<label for="pwd">Password:</label>-->
+<!--<input th:field="*{password}"  type="password" class="form-control" id="pwd" placeholder="Enter password" name="pswd">-->
+<!--</div>-->
+
+
+<!--<button type="submit" class="btn btn-primary">Submit</button>-->
+<!--</form>-->
+<!--</div>-->
+
+
+<!--<th:block th:include="partialViews/footer :: footer"></th:block>-->
+
+<!--</body>-->
+<!--</html>-->
