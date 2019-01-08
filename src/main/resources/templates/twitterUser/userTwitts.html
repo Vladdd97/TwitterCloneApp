@@ -20,7 +20,13 @@
             <div class="card">
                 <img class="card-img-top" src="https://www.w3schools.com/howto/img_avatar.png" alt="Card image cap">
                 <div class="card-body">
-                    <h5 class="card-title" th:text="${userDetails.getName()}">username</h5>
+
+                    <span th:if="${username == null}">
+                        <h5 class="card-title" th:text="${userDetails.getName()}">username</h5>
+                    </span>
+                    <span th:if="${username != null}">
+                        <h5 class="card-title" th:text="${username}">username</h5>
+                    </span>
                     <!--<p class="card-text">user info</p>-->
                 </div>
                 <ul class="list-group list-group-flush">
@@ -35,7 +41,7 @@
         </div>
 
         <!--tweet card-->
-        <div class="col-5" >
+        <div class="col-7" >
             <div th:each="twitt: ${userTwitts}"  class="card mx-1 mb-5" >
                 <div class="card-body">
 
@@ -74,7 +80,7 @@
                                 <span>Posted on</span>
                                 <span th:text="${comment.getCreateDate().toLocaleString()}">no user</span>
                                 <span>by</span>
-                                <span th:text="${comment.getCreateByUser()}" class="text-info"> user </span>
+                                <span th:text="${comment.getTwitterUser().getUsername()}" class="text-info"> user </span>
                             </div>
                             <div class="card-body">
                                 <p th:text="${comment.getContent()}" class="card-text">With supporting text below as a natural lead-in to additional content.</p>

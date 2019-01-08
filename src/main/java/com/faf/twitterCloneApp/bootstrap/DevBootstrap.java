@@ -62,13 +62,11 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             ArrayList<Twitt> twitts = new ArrayList<>();
 
             Twitt twitt1 = new Twitt();
-            twitt1.setTitle("Title 1");
             twitt1.setContent("Content 1 : Wanna sleep !");
             twitt1.setCreateDate(new Date());
             twitt1.setTwitterUser(twitterUser1);
 
             Twitt twitt2 = new Twitt();
-            twitt2.setTitle("Title 2");
             twitt2.setContent("Content 2 : just need more time for that");
             twitt2.setCreateDate(new Date());
             twitt2.setTwitterUser(twitterUser1);
@@ -76,9 +74,9 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             // add comment
             Comment comment = new Comment();
             comment.setContent("This is a simple comment ...");
-            comment.setCreateByUser("dev");
             comment.setCreateDate(new Date());
             comment.setTwitt(twitt2);
+            comment.setTwitterUser(twitterUser1);
 
 
             twitts.add(twitt1);
@@ -117,19 +115,16 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         ArrayList<Twitt> twitts = new ArrayList<>();
 
         Twitt twitt1 = new Twitt();
-        twitt1.setTitle("Abduction");
         twitt1.setContent("A thriller centered on a young man who sets out to uncover the truth about his life after finding his baby photo on a missing persons website.");
         twitt1.setCreateDate(new Date());
         twitt1.setTwitterUser(twitterUser2);
 
         Twitt twitt2 = new Twitt();
-        twitt2.setTitle("A Christmas Too Many");
         twitt2.setContent("A Hollywood legend invites her not-so-normal family home for the holidays.");
         twitt2.setCreateDate(new Date());
         twitt2.setTwitterUser(twitterUser2);
 
         Twitt twitt3 = new Twitt();
-        twitt3.setTitle("The Hunger Games");
         twitt3.setContent("Following her rescue from the devastating Quarter Quell, " +
                 "Katniss (Jennifer Lawrence) awakes in the complex beneath the supposedly destroyed District 13. " +
                 "Her home, District 12, has been reduced to rubble, and Peeta Mellark (Josh Hutcherson) is now the brainwashed " +

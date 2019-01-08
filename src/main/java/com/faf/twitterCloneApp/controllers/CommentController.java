@@ -4,6 +4,7 @@ package com.faf.twitterCloneApp.controllers;
 import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.services.CommentService;
 import com.faf.twitterCloneApp.services.TwittService;
+import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -23,6 +24,9 @@ public class CommentController {
     @Autowired
     private TwittService twittServiceImpl;
 
+    @Autowired
+    private TwitterUserService twitterUserServiceImpl;
+
 //    @GetMapping("/commentForm")
 //    public String commentForm (Model model , Principal principal){
 ////
@@ -38,8 +42,8 @@ public class CommentController {
                                 @ModelAttribute Comment comment , Model model , Principal principal){
 
         comment.setCreateDate(new Date());
-        comment.setCreateByUser(principal.getName());
         comment.setTwitt(twittServiceImpl.findById(twittId));
+        comment.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         commentServiceImpl.save(comment);
 
 
