@@ -37,7 +37,7 @@ public class TweetController {
         tweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         tweetServiceImpl.save(tweet);
 
-        return "redirect:/twitterUser/homePage";
+        return "redirect:/twitterUser/profilePage";
     }
 
 

@@ -44,11 +44,13 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <!--count how many users have this user as follower one-->
-                        Following <span th:text="${userInfo.getFollowers().size()}"></span>
+                        <a th:href="@{/tweetFollow/followings(username=${userInfo.getUsername()})}" >Following</a>
+                        <span th:text="${userInfo.getFollowers().size()}"></span>
                     </li>
                     <li class="list-group-item">
                         <!--count how many users have this user as following one-->
-                        Followers <span th:text="${userInfo.getFollowings().size()}"></span>
+                        <a th:href="@{/tweetFollow/followers(username=${userInfo.getUsername()})}" >Followers</a>
+                        <span th:text="${userInfo.getFollowings().size()}"></span>
                     </li>
                 </ul>
                 <div class="card-body">
@@ -97,7 +99,7 @@
                         <span>Posted on</span>
                         <span th:text="${tweet.getCreateDate().toLocaleString()}"> ...</span>
                         <span>by</span>
-                        <span class="text-primary" th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
+                        <a   th:href="@{/twitterUser/profilePage(username=${tweet.getTwitterUser().getUsername()})}" th:text="${tweet.getTwitterUser().getUsername()}" class="text-primary" >no user</a>
                         <div th:if="${authenticatedUserUsername.equals(tweet.getTwitterUser().getUsername())}"
                              class="float-right">
                             <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="mr-2">
