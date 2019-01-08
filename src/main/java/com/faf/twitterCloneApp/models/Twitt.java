@@ -26,6 +26,14 @@ public class Twitt {
     @Type(type="timestamp")
     private Date createDate;
 
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
     private List<Comment> comments;
 

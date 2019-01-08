@@ -2,9 +2,8 @@ package com.faf.twitterCloneApp.controllers;
 
 
 import com.faf.twitterCloneApp.models.Twitt;
-import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
-import com.faf.twitterCloneApp.services.TwittServiceImpl;
-import com.faf.twitterCloneApp.services.TwitterUserServiceImpl;
+import com.faf.twitterCloneApp.services.TwittService;
+import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -18,10 +17,10 @@ import java.util.Date;
 public class TwittController {
 
     @Autowired
-    TwitterUserServiceImpl twitterUserServiceImpl;
+    TwitterUserService twitterUserServiceImpl;
 
     @Autowired
-    TwittServiceImpl twittServiceImpl;
+    TwittService twittServiceImpl;
 
     @GetMapping("/twittForm")
     public String twittFrom (Model model , Principal principal){
