@@ -55,4 +55,16 @@ public class TweetController {
         return  "redirect:/";
     }
 
+    @GetMapping("/retweet")
+    public String retweet (@RequestParam(value = "tweetId",required = true) Long tweetId , Principal principal){
+
+        Tweet retweetedTweet = tweetServiceImpl.findById(tweetId);
+        Tweet newTweet = new Tweet();
+        newTweet.setContent(retweetedTweet.getContent());
+        newTweet.setCreateDate(retweetedTweet.getCreateDate());
+        newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
+        tweetServiceImpl.save(newTweet);
+        return "redirect:/";
+    }
+
 }

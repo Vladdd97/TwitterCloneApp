@@ -108,7 +108,9 @@
                             </a>
                         </div>
                         <div th:unless="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}"  class="float-right">
+                            <a th:href="@{/tweet/retweet(tweetId=${tweet.getId()})}">
                             <i class="fa fa-share-square-o" style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
+                            </a>
                         </div>
                     </div>
                     <p th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
