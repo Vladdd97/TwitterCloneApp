@@ -119,6 +119,11 @@
                                 <i class="fa fa-share-square-o" style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
                             </a>
                         </div>
+                        <div>
+                            <a th:href="@{/tweet/bookmark(tweetId=${tweet.getId()})}">
+                                <i class="fa fa-star" style="font-size:36px;color:yellow"></i>
+                            </a>
+                        </div>
                     </div>
                     <p th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
                 </div>

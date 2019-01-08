@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.bootstrap;
 
 import com.faf.twitterCloneApp.models.*;
+import com.faf.twitterCloneApp.models.util.Gender;
 import com.faf.twitterCloneApp.repositories.AuthorityRepository;
 import com.faf.twitterCloneApp.services.CommentServiceImpl;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
@@ -53,7 +54,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
             twitterUser1.setEnabled(true);
 
             TwitterUserInfo twitterUserInfo = new TwitterUserInfo();
-            twitterUserInfo.setGender("M");
+            twitterUserInfo.setGender(Gender.Male);
             twitterUserInfo.setEmail("vladislav.bantus@faf.utm.md");
             twitterUserInfo.setTwitterUser(twitterUser1);
             twitterUser1.setTwitterUserInfo(twitterUserInfo);

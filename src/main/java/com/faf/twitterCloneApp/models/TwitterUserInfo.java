@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.models;
 
 
+import com.faf.twitterCloneApp.models.util.Gender;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -18,7 +19,7 @@ public class TwitterUserInfo {
 
     private String email;
 
-    private String gender;
+    private Gender gender;
 
     private String userInfo;
 
@@ -35,6 +36,9 @@ public class TwitterUserInfo {
     public void prePersist(){
         if ( this.isEmailNotificationEnabled == null){
             this.isEmailNotificationEnabled = false;
+        }
+        if ( this.gender == null){
+            this.gender = Gender.Male;
         }
     }
 
