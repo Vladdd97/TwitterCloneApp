@@ -40,37 +40,30 @@ public class IndexController {
     TweetFollowServiceImpl tweetFollowServiceImpl;
 
 
-
     @GetMapping("/")
-    public String index (Model model , Principal principal){
+    public String index(Model model, Principal principal) {
         int pageNumber = 0;
         int pageSize = 10;
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String password = "dev";
 //        System.out.println("password : " + password);
 //        System.out.println("PASSWORD : " + bCryptPasswordEncoder.encode(password));
-        if ( principal != null) {
+        if (principal != null) {
             model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
-            model.addAttribute("newTweet",new Tweet());
-            model.addAttribute("newComment",new Comment());
-            model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber,pageSize));
-            //model.addAttribute("authenticatedUserUsername",principal.getName());
-            List<TwitterUser> users = twitterUserServiceImpl.findSuggestFollowUsers(Long.valueOf(128),pageNumber,pageSize);
-            TwitterUser dev = twitterUserServiceImpl.findByUsername(principal.getName()).get();
-
-            int a=44;
-
+            model.addAttribute("newTweet", new Tweet());
+            model.addAttribute("newComment", new Comment());
+            model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber, pageSize));
+            model.addAttribute("suggestFollowUsers", twitterUserServiceImpl.findSuggestFollowUsers(Long.valueOf(128), pageNumber, pageSize));
             return "index";
-        }
-        else{
+        } else {
             return "redirect:/loginPage";
         }
     }
 
 
     @GetMapping("/loginPage")
-    public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
-                                  @RequestParam(value = "logout",	required = false) String logout , Principal principal){
+    public ModelAndView loginPage(@RequestParam(value = "error", required = false) String error,
+                                  @RequestParam(value = "logout", required = false) String logout, Principal principal) {
         ModelAndView model = new ModelAndView();
         if (error != null) {
             model.addObject("error", "Invalid Credentials provided.");
@@ -79,17 +72,17 @@ public class IndexController {
         if (logout != null) {
             model.addObject("logout", "Logged out from TwitterCloneApp successfully.");
         }
-        model.addObject("userDetails",principal);
+        model.addObject("userDetails", principal);
         model.setViewName("loginPage");
         return model;
     }
 
 
     @GetMapping("/logoutPage")
-    public ModelAndView logoutPage(Principal principal){
+    public ModelAndView logoutPage(Principal principal) {
         ModelAndView model = new ModelAndView();
 
-        model.addObject("userDetails",principal);
+        model.addObject("userDetails", principal);
         model.setViewName("logoutPage");
         return model;
     }

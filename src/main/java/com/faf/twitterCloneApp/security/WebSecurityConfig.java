@@ -48,6 +48,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers("/twitterUser/userDetails*").hasRole("USER")
                 .antMatchers("/twitterUser/userTweets*").hasRole("USER")
+                .antMatchers("/twitterUser/followUser*").hasRole("USER")
                 .antMatchers("/**").permitAll()
                 //.antMatchers("/public/**").permitAll()
                 //.antMatchers("/tweet/tweetFrom").permitAll()

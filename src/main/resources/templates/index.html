@@ -35,7 +35,7 @@
 
         <div class="col-3">
             <!--user card-->
-            <div class="card">
+            <div class="card mb-5">
                 <img class="card-img-top" src="https://www.w3schools.com/howto/img_avatar.png" alt="Card image cap">
                 <div class="card-body">
 
@@ -58,23 +58,36 @@
             </div>
             <!--end of user card-->
 
+            <div class="card p-2">
+                <div class="card-header">
+                    Suggest for Follow Users
+                </div>
+                <!--user suggest card-->
+                <div th:each="user:${suggestFollowUsers}" class="card mt-2">
+                    <div class="card-body">
+                        <span th:text="${user.getUsername()}" ></span>
+                        <a th:href="@{/twitterUser/followUser(username=${user.getUsername()})}" class="btn btn-primary ml-5">Follow</a>
+                    </div>
+                </div>
+                <!--end of user suggest card-->
+            </div>
         </div>
 
 
         <div class="col-7">
 
 
-<!--tweet from-->
-            <form   th:action="@{/tweet/saveOrUpdate}" th:object="${newTweet}" method="post">
+            <!--tweet from-->
+            <form th:action="@{/tweet/saveOrUpdate}" th:object="${newTweet}" method="post">
                 <input type="hidden" th:field="*{id}"/>
 
                 <div class="form-group">
                     <label for="content">Content:</label>
-                    <input class="form-control" id="content" th:field="*{content}" >
+                    <input class="form-control" id="content" th:field="*{content}">
                 </div>
                 <button type="submit" class="btn btn-primary">Submit</button>
             </form>
-<!--end of tweet form-->
+            <!--end of tweet form-->
 
             <!--tweet card-->
             <div th:each="tweet: ${topTweetsByNumberOfReactions}" class="card mx-1 my-4">
@@ -85,9 +98,17 @@
                         <span th:text="${tweet.getCreateDate().toLocaleString()}"> ...</span>
                         <span>by</span>
                         <span class="text-primary" th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
-                        <div th:if="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}">
-                            <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="text-primary">Modify</a>
-                            <a th:href="@{/tweet/deleteTweet(id=${tweet.getId()})}" class="text-danger">Delete</a>
+                        <div th:if="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}"
+                             class="float-right">
+                            <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="mr-2">
+                                <i class="material-icons" style="font-size:24px;color:dodgerblue; cursor: pointer;" title="Edit Tweet">edit</i>
+                            </a>
+                            <a th:href="@{/tweet/deleteTweet(id=${tweet.getId()})}" class="text-danger">
+                                <i class="material-icons" style="font-size:24px;color:black; cursor: pointer;" title="Delete Tweet" >delete</i>
+                            </a>
+                        </div>
+                        <div th:unless="${userInfo.getUsername().equals(tweet.getTwitterUser().getUsername())}"  class="float-right">
+                            <i class="fa fa-share-square-o" style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
                         </div>
                     </div>
                     <p th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
