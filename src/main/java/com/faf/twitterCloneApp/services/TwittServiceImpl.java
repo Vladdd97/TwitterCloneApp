@@ -35,4 +35,9 @@ public class TwittServiceImpl implements TwittService {
     public Long count() {
         return twittRepository.count();
     }
+
+    @Override
+    public Iterable<Twitt> findAllByTwitterUserUsername(String username) {
+        return twittRepository.findAllByTwitterUserUsername(username);
+    }
 }

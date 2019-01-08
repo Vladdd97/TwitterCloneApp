@@ -34,7 +34,6 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     public void initData(){
-
         //user 1
         TwitterUser twitterUser1 = new TwitterUser();
         twitterUser1.setUsername("Vasile");
@@ -68,10 +67,10 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         twitterUser1.setAuthorities(authorities);
         twitterUserServiceImpl.save(twitterUser1);
 
-        twittServiceImpl.save(twitt1);
-        twittServiceImpl.save(twitt2);
-
-        authorityRepository.save(authority1);
+//        twittServiceImpl.save(twitt1);
+//        twittServiceImpl.save(twitt2);
+//
+//        authorityRepository.save(authority1);
 
 
 

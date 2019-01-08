@@ -14,4 +14,6 @@ public interface TwittService {
 
     Long count();
 
+    Iterable<Twitt> findAllByTwitterUserUsername(String username);
+
 }

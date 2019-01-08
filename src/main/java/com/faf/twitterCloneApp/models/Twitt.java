@@ -1,6 +1,8 @@
 package com.faf.twitterCloneApp.models;
 
 
+import org.hibernate.annotations.Type;
+
 import javax.persistence.*;
 
 @Entity
@@ -12,6 +14,7 @@ public class Twitt {
 
     private String title;
 
+    @Type(type = "text")
     private String content;
 
     @ManyToOne
