@@ -1,0 +1,20 @@
+package com.faf.twitterCloneApp.services;
+
+import com.faf.twitterCloneApp.models.Reaction;
+
+import java.util.Optional;
+
+public interface ReactionService {
+
+    Iterable<Reaction> getAll();
+
+    Reaction findById (Long id);
+
+    Reaction save(Reaction reaction);
+
+    void deleteById(Long id);
+
+    Long count();
+
+    Optional<Reaction> findByTwittIdAndLikedByUser (Long twittId , String username);
+}

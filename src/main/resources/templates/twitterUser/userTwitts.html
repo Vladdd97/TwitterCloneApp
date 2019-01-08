@@ -5,6 +5,7 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <body>
 <th:block th:include="partialViews/navbar :: navbar"></th:block>
@@ -36,16 +37,43 @@
                     <div class="card-body">
                         <h2 th:text="${twitt.getTitle()}" class="card-title">Post Title</h2>
                         <p th:text="${twitt.getContent()}" class="card-text">Post text</p>
-                        <button type="button" class="btn btn-primary" data-toggle="collapse"
+                        <div th:if="${username == null}">
+                            <a th:href="@{/twitt/updateTwitt(id=${twitt.getId()})}" class="btn btn-primary">Modify</a>
+                            <a th:href="@{/twitt/deleteTwitt(id=${twitt.getId()})}" class="btn btn-danger">Delete</a>
+                        </div>
+                        <button type="button" class="btn btn-primary my-3" data-toggle="collapse"
                                 th:attr="data-target='#comment'+${twitt.getId()}">Simple collapsible
                         </button>
-                        <div   th:id="'comment'+${twitt.getId()}" class="collapse" >
-                            <div th:each="comment:${twitt.getComments()}">
-                                <span th:text="${comment.getContent()}"></span>
-                            </div>
+                        <div>
+                            <a th:href="@{/reaction/saveOrUpdate(username = ${twitt.getTwitterUser().getUsername()} ,twittId=${twitt.getId()})}">
+                            <i class="material-icons" style="font-size:48px;color:#2962ff">thumb_up</i>
+                            </a>
+                            <span th:text="${twitt.getReactions().size()}" >number</span>
                         </div>
-                        <a th:href="@{/twitt/updateTwitt(id=${twitt.getId()})}" class="btn btn-primary">Modify</a>
-                        <a th:href="@{/twitt/deleteTwitt(id=${twitt.getId()})}" class="btn btn-danger">Delete</a>
+
+                        <div th:id="'comment'+${twitt.getId()}" class="collapse">
+                            <div th:each="comment:${twitt.getComments()}" class="card my-2">
+                                <div class="card-body" th:text="${comment.getContent()}"></div>
+                            </div>
+
+
+                            <div class="container">
+                                <form th:action="@{/comment/saveOrUpdate(twittId=${twitt.getId()} , username=${twitt.getTwitterUser().getUsername()})}"
+                                      th:object="${newComment}" method="post">
+                                    <input type="hidden" th:field="*{id}"/>
+                                    <div class="form-group">
+                                        <label for="content">Write your comment:</label>
+                                        <input class="form-control" id="content" th:field="*{content}">
+                                    </div>
+
+
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </form>
+                            </div>
+
+                        </div>
+
+
                     </div>
                     <div class="card-footer text-muted">
                         <span>Posted on</span>

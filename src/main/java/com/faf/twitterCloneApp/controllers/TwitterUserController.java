@@ -1,5 +1,6 @@
 package com.faf.twitterCloneApp.controllers;
 
+import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.models.Twitt;
 import com.faf.twitterCloneApp.services.TwittFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TwittService;
@@ -45,6 +46,7 @@ public class TwitterUserController {
 
         model.addAttribute("userTwitts",twitts);
         model.addAttribute("userDetails",principal);
+        model.addAttribute("newComment",new Comment());
         return "twitterUser/userTwitts";
     }
 

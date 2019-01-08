@@ -26,16 +26,12 @@ public class Twitt {
     @Type(type="timestamp")
     private Date createDate;
 
-    public List<Comment> getComments() {
-        return comments;
-    }
-
-    public void setComments(List<Comment> comments) {
-        this.comments = comments;
-    }
-
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
     private List<Comment> comments;
+
+
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
+    private List<Reaction> reactions;
 
 
     public Long getId() {
@@ -76,5 +72,21 @@ public class Twitt {
 
     public void setCreateDate(Date createDate) {
         this.createDate = createDate;
+    }
+
+    public List<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(List<Comment> comments) {
+        this.comments = comments;
+    }
+
+    public List<Reaction> getReactions() {
+        return reactions;
+    }
+
+    public void setReactions(List<Reaction> reactions) {
+        this.reactions = reactions;
     }
 }

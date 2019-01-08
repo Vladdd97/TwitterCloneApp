@@ -53,7 +53,7 @@ public class TwittController {
     @GetMapping("/deleteTwitt")
     public String deleteTwitt (@RequestParam("id") String id){
         twittServiceImpl.deleteById(Long.valueOf(id));
-        return  "redirect:/twitt/userTwitts";
+        return  "redirect:/twitterUser/userTwitts";
     }
 
 }
