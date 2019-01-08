@@ -2,6 +2,7 @@ package com.faf.twitterCloneApp.controllers;
 
 
 import com.faf.twitterCloneApp.models.Tweet;
+import com.faf.twitterCloneApp.models.util.TweetType;
 import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -58,13 +59,25 @@ public class TweetController {
     @GetMapping("/retweet")
     public String retweet (@RequestParam(value = "tweetId",required = true) Long tweetId , Principal principal){
 
-        Tweet retweetedTweet = tweetServiceImpl.findById(tweetId);
-        Tweet newTweet = new Tweet();
-        newTweet.setContent(retweetedTweet.getContent());
-        newTweet.setCreateDate(new Date());
-        newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
-        tweetServiceImpl.save(newTweet);
-        return "redirect:/twitterUser/profilePage";
+
+        if (!tweetServiceImpl.findByParentTweetId(tweetId).isPresent()) {
+
+            Tweet retweetedTweet = tweetServiceImpl.findById(tweetId);
+            Tweet newTweet = new Tweet();
+            newTweet.setContent(retweetedTweet.getContent());
+            newTweet.setCreateDate(new Date());
+            newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
+            newTweet.setType(TweetType.Retweet);
+            newTweet.setParentTweetId(tweetId);
+            tweetServiceImpl.save(newTweet);
+            return "redirect:/twitterUser/profilePage";
+
+        }
+        else {
+            String message = "You have retweeted this tweet already! Check you profile page! ";
+            return "redirect:/messagePage?message="+message;
+        }
+
     }
 
 }

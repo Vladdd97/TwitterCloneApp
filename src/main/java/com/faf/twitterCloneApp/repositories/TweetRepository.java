@@ -7,6 +7,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.CrudRepository;
 
 import java.util.List;
+import java.util.Optional;
 
 public interface TweetRepository extends CrudRepository<Tweet,Long> {
 
@@ -14,6 +15,8 @@ public interface TweetRepository extends CrudRepository<Tweet,Long> {
     Iterable<Tweet> findAllByTwitterUserUsername(String username);
 
     Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
+
+    Optional<Tweet> findByParentTweetId(Long parentTweetId);
 
     @Query("SELECT t FROM Tweet as t left join t.reactions as r group by t order by count(r.id) desc")
 //    @Query(value = "" +

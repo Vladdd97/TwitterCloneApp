@@ -17,6 +17,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.jws.WebParam;
 import java.math.BigInteger;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -116,13 +117,13 @@ public class IndexController {
     }
 
 
-    @GetMapping("/sendMail")
-    public String sendMail(){
+    @GetMapping("/messagePage")
+    public String sendMail(@RequestParam(value = "message",required = true) String message  ,Model model){
 
 
-        emailService.sendEmail("vladislav.bantus@faf.utm.md","vladbantus02@gmail.com","TwitterCloneApp","Test5");
+        model.addAttribute("message",message);
 
-        return "redirect:/twitterUser/homePage";
+        return "messagePage";
     }
 
 }

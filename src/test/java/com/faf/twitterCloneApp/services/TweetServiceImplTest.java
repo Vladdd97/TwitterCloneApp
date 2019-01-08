@@ -30,8 +30,8 @@ public class TweetServiceImplTest {
     @Test
     public void findAll() {
         Iterable<Tweet> tweets = new ArrayList<>();
-        Tweet tweet1 = new Tweet(2L,"content for tweet1",null,new Date(),null,null);
-        Tweet tweet2 = new Tweet(3L,"content for tweet2",null,new Date(),null,null);
+        Tweet tweet1 = new Tweet(2L,"content for tweet1",null,new Date(),null,null,null,null);
+        Tweet tweet2 = new Tweet(3L,"content for tweet2",null,new Date(),null,null,null,null);
 
         ((ArrayList<Tweet>) tweets).add(tweet1);
         ((ArrayList<Tweet>) tweets).add(tweet2);
@@ -45,7 +45,8 @@ public class TweetServiceImplTest {
     @Test
     public void findById() {
         Long tweetId = 3L;
-        Tweet tweet1 = new Tweet(2L,"content for tweet1",null,new Date(),null,null);
+        Tweet tweet1 = new Tweet(2L,"content for tweet1",null,new Date(),
+                null,null,null,null);
         Optional<Tweet> optionalTweet = Optional.of(tweet1);
 
         Mockito.when(tweetRepository.findById(tweetId)).thenReturn(optionalTweet);

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TweetServiceImpl implements TweetService {
@@ -53,6 +54,11 @@ public class TweetServiceImpl implements TweetService {
     @Override
     public Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username) {
         return tweetRepository.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
+    }
+
+    @Override
+    public Optional<Tweet> findByParentTweetId(Long parentTweetId) {
+        return tweetRepository.findByParentTweetId(parentTweetId);
     }
 
     @Override

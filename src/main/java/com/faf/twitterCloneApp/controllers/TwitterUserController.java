@@ -83,18 +83,4 @@ public class TwitterUserController {
     }
 
 
-
-
-
-    @GetMapping("/userDetails")
-    public String userDetails (Model model , Principal principal){
-
-        model.addAttribute("userDetails",principal);
-        model.addAttribute("followers", tweetFollowServiceImpl.findAllByFollowingUsername(principal.getName()));
-        model.addAttribute("followings", tweetFollowServiceImpl.findAllByFollowerUsername(principal.getName()));
-        return "twitterUser/userDetails";
-    }
-
-
-
 }
