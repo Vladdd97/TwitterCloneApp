@@ -47,6 +47,11 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
+    public Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username) {
+        return tweetRepository.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
+    }
+
+    @Override
     public List<Tweet> findTopTweetsByNumberOfReactions(Integer pageNumber, Integer pageSize) {
 
         List<Tweet> tweets = new ArrayList<>();

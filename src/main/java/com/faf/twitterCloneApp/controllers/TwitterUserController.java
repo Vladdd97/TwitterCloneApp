@@ -53,6 +53,27 @@ public class TwitterUserController {
 
 
 
+    @GetMapping("/profilePage")
+    public String profilePage (@RequestParam(value = "username",required = false) String username , Model model ,Principal principal){
+
+        if ( username == null){
+            username = principal.getName();
+        }
+
+        model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
+        model.addAttribute("tweets",tweetServiceImpl.findAllByTwitterUserUsernameOrderByCreateDateDesc(username));
+        model.addAttribute("newTweet", new Tweet());
+        model.addAttribute("newComment", new Comment());
+       return "twitterUser/profilePage";
+
+    }
+
+
+
+
+
+
+
 
 
 
