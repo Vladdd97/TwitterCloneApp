@@ -10,8 +10,12 @@ import java.util.Optional;
 @Service
 public class ReactionServiceImpl implements ReactionService{
 
-    @Autowired
     private ReactionRepository reactionRepository;
+
+    @Autowired
+    public ReactionServiceImpl(ReactionRepository reactionRepository) {
+        this.reactionRepository = reactionRepository;
+    }
 
     @Override
     public Iterable<Reaction> findAll() {

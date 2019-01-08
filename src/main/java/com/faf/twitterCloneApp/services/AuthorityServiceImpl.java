@@ -6,8 +6,13 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 public class AuthorityServiceImpl implements AuthorityService {
 
+
+    private AuthorityRepository authorityRepository;
+
     @Autowired
-    AuthorityRepository authorityRepository;
+    public AuthorityServiceImpl(AuthorityRepository authorityRepository) {
+        this.authorityRepository = authorityRepository;
+    }
 
     @Override
     public Iterable<Authority> findAll() {

@@ -13,8 +13,12 @@ import java.util.List;
 @Service
 public class TweetServiceImpl implements TweetService {
 
-    @Autowired
     private TweetRepository tweetRepository;
+
+    @Autowired
+    public TweetServiceImpl(TweetRepository tweetRepository) {
+        this.tweetRepository = tweetRepository;
+    }
 
     @Override
     public Iterable<Tweet> findAll() {

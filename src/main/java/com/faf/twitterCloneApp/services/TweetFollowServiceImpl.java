@@ -8,8 +8,12 @@ import org.springframework.stereotype.Service;
 @Service
 public class TweetFollowServiceImpl implements TweetFollowService {
 
+    private TweetFollowRepository tweetFollowRepository;
+
     @Autowired
-    TweetFollowRepository tweetFollowRepository;
+    public TweetFollowServiceImpl(TweetFollowRepository tweetFollowRepository) {
+        this.tweetFollowRepository = tweetFollowRepository;
+    }
 
     @Override
     public Iterable<TweetFollow> findAll() {

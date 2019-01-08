@@ -15,8 +15,13 @@ import java.util.Optional;
 @Service
 public class TwitterUserServiceImpl implements TwitterUserService {
 
-    @Autowired
+
     TwitterUserRepository twitterUserRepository;
+
+    @Autowired
+    public TwitterUserServiceImpl(TwitterUserRepository twitterUserRepository) {
+        this.twitterUserRepository = twitterUserRepository;
+    }
 
     @Override
     public Iterable<TwitterUser> findAll() {

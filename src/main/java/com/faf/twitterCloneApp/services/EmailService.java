@@ -10,8 +10,12 @@ import sun.java2d.pipe.SpanShapeRenderer;
 @Service
 public class EmailService {
 
-    @Autowired
     private JavaMailSender javaMailSender;
+
+    @Autowired
+    public EmailService(JavaMailSender javaMailSender) {
+        this.javaMailSender = javaMailSender;
+    }
 
     public void sendEmail(String to, String from, String subject, String text){
         SimpleMailMessage simpleMailMessage = new SimpleMailMessage();
