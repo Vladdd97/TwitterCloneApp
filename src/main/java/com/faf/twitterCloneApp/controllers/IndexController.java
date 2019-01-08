@@ -25,8 +25,13 @@ public class IndexController {
 //        String password = "dev";
 //        System.out.println("password : " + password);
 //        System.out.println("PASSWORD : " + bCryptPasswordEncoder.encode(password));
-        model.addAttribute("userDetails",principal);
-       return "index";
+        if ( principal != null) {
+            model.addAttribute("userDetails", principal);
+            return "index";
+        }
+        else{
+            return "redirect:/loginPage";
+        }
     }
 
 
