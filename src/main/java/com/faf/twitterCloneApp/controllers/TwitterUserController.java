@@ -10,6 +10,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
 import java.util.List;
@@ -28,25 +29,27 @@ public class TwitterUserController {
     public String userDetails (Model model , Principal principal){
 
         model.addAttribute("userDetails",principal);
-        //Iterable<TwittFollow> twittFollows = twittFollowServiceImpl.findAllByFollowingUsernameOrFollowerUsername(principal.getName() , principal.getName());
-
-        Iterable<TwittFollow> followings = twittFollowServiceImpl.findAllByFollowingUsername(principal.getName());
-        Iterable<TwittFollow> followers = twittFollowServiceImpl.findAllByFollowerUsername(principal.getName());
-        model.addAttribute("followings", twittFollowServiceImpl.findAllByFollowingUsername(principal.getName()));
-        model.addAttribute("followers", twittFollowServiceImpl.findAllByFollowerUsername(principal.getName()));
+        model.addAttribute("followers", twittFollowServiceImpl.findAllByFollowingUsername(principal.getName()));
+        model.addAttribute("followings", twittFollowServiceImpl.findAllByFollowerUsername(principal.getName()));
         return "twitterUser/userDetails";
     }
 
     @GetMapping("/userTwitts")
-    public String userTwitts (Model model , Principal principal){
+    public String userTwitts (@RequestParam(value = "username",required = false) String username , Model model , Principal principal){
+        Iterable<Twitt> twitts;
 
-        Iterable<Twitt> twitts ;
-
-        twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
+        if ( username == null){
+            twitts = twittServiceImpl.findAllByTwitterUserUsername(principal.getName());
+        }
+        else{
+            twitts = twittServiceImpl.findAllByTwitterUserUsername(username);
+            model.addAttribute("username",username);
+        }
 
         model.addAttribute("userTwitts",twitts);
         model.addAttribute("userDetails",principal);
         return "twitterUser/userTwitts";
     }
+
 
 }

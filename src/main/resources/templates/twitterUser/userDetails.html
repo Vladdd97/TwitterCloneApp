@@ -27,21 +27,15 @@
         </thead>
 
         <tbody>
-        <tr th:each="following : ${followings}">
+        <tr th:each="follower : ${followers}">
 
 
-            <td th:text="${following.getFollower().getUsername()}">follower</td>
-            <!--<td th:text="${book.getAuthor()}">Place for Author</td>-->
-            <!--<td>-->
-            <!--<a th:href="@{/book/updateBook(bookId=${book.getId()})}">-->
-            <!--<button class="nav-link btn btn-primary">modify</button>-->
-            <!--</a>-->
-            <!--</td>-->
-            <!--<td>-->
-            <!--<a th:href="@{/book/deleteBook(bookId=${book.getId()})}"  >-->
-            <!--<button class="nav-link btn btn-danger">Delete</button>-->
-            <!--</a>-->
-            <!--</td>-->
+
+            <td>
+            <a th:href="@{/twitterUser/userTwitts(username=${follower.getFollower().getUsername()})}"  >
+            <button  th:text="${follower.getFollower().getUsername()}"  class="btn btn-info">username</button>
+            </a>
+            </td>
         </tr>
         </tbody>
     </table>
@@ -58,10 +52,14 @@
         </thead>
 
         <tbody>
-        <tr th:each="follower : ${followers}">
+        <tr th:each="following : ${followings}">
 
+            <td>
+                <a th:href="@{/twitterUser/userTwitts(username=${following.getFollowing().getUsername()})}"  >
+                    <button  th:text="${following.getFollowing().getUsername()}"  class="btn btn-primary">username</button>
+                </a>
+            </td>
 
-            <td th:text="${follower.getFollowing().getUsername()}">following</td>
             <!--<td th:text="${book.getAuthor()}">Place for Author</td>-->
             <!--<td>-->
             <!--<a th:href="@{/book/updateBook(bookId=${book.getId()})}">-->

@@ -48,45 +48,49 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     }
 
     public void initUser1(){
-        //user 1
-        TwitterUser twitterUser1 = new TwitterUser();
-        twitterUser1.setUsername("vasile");
-        twitterUser1.setPassword("$2a$10$eET7zB2oNuhzsEDUMmy3L.VHvZ/N.NwbD4T5IKPl6cPZ0WNCAuhFG"); //vasile
-        twitterUser1.setEnabled(true);
+        int count = 0 ;
+
+        for ( count = 0 ; count < 10 ; count++) {
+            //user 1
+            TwitterUser twitterUser1 = new TwitterUser();
+            twitterUser1.setUsername("vasile" + count);
+            twitterUser1.setPassword("$2a$10$eET7zB2oNuhzsEDUMmy3L.VHvZ/N.NwbD4T5IKPl6cPZ0WNCAuhFG"); //vasile
+            twitterUser1.setEnabled(true);
 
 
-        ArrayList<Twitt> twitts = new ArrayList<>();
+            ArrayList<Twitt> twitts = new ArrayList<>();
 
-        Twitt twitt1 = new Twitt();
-        twitt1.setTitle("Title 1");
-        twitt1.setContent("Content 1 : Wanna sleep !");
-        twitt1.setCreateDate(new Date());
-        twitt1.setTwitterUser(twitterUser1);
+            Twitt twitt1 = new Twitt();
+            twitt1.setTitle("Title 1");
+            twitt1.setContent("Content 1 : Wanna sleep !");
+            twitt1.setCreateDate(new Date());
+            twitt1.setTwitterUser(twitterUser1);
 
-        Twitt twitt2 = new Twitt();
-        twitt2.setTitle("Title 2");
-        twitt2.setContent("Content 2 : just need more time for that");
-        twitt2.setCreateDate(new Date());
-        twitt2.setTwitterUser(twitterUser1);
+            Twitt twitt2 = new Twitt();
+            twitt2.setTitle("Title 2");
+            twitt2.setContent("Content 2 : just need more time for that");
+            twitt2.setCreateDate(new Date());
+            twitt2.setTwitterUser(twitterUser1);
 
-        twitts.add(twitt1);
-        twitts.add(twitt2);
+            twitts.add(twitt1);
+            twitts.add(twitt2);
 
-        Authority authority1 = new Authority();
-        authority1.setRole("ROLE_USER");
-        authority1.setTwitterUser(twitterUser1);
+            Authority authority1 = new Authority();
+            authority1.setRole("ROLE_USER");
+            authority1.setTwitterUser(twitterUser1);
 
-        ArrayList<Authority> authorities = new ArrayList<>();
-        authorities.add(authority1);
+            ArrayList<Authority> authorities = new ArrayList<>();
+            authorities.add(authority1);
 
-        twitterUser1.setTwitts(twitts);
-        twitterUser1.setAuthorities(authorities);
-        twitterUserServiceImpl.save(twitterUser1);
+            twitterUser1.setTwitts(twitts);
+            twitterUser1.setAuthorities(authorities);
+            twitterUserServiceImpl.save(twitterUser1);
 
 //        twittServiceImpl.save(twitt1);
 //        twittServiceImpl.save(twitt2);
 //
 //        authorityRepository.save(authority1);
+        }
     }
 
     public void initUser2() {
@@ -146,18 +150,39 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
 
     public void initTwittFollow(){
 
-        TwittFollow twittFollow1 = new TwittFollow();
-        twittFollow1.setFollowing(twitterUserServiceImpl.findByUsername("dev").get());
-        twittFollow1.setFollower(twitterUserServiceImpl.findByUsername("vasile").get());
+        for (int count = 0 ; count < 8 ; count ++) {
+            TwittFollow twittFollow1 = new TwittFollow();
+            twittFollow1.setFollowing(twitterUserServiceImpl.findByUsername("dev").get());
+            twittFollow1.setFollower(twitterUserServiceImpl.findByUsername("vasile" + count).get());
+            twittFollowServiceImpl.save(twittFollow1);
+        }
 
+        for ( int count = 3 ; count < 5 ; count++) {
+            TwittFollow twittFollow2 = new TwittFollow();
+            twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile1").get());
+            twittFollow2.setFollower(twitterUserServiceImpl.findByUsername("vasile" + count).get());
+
+            twittFollowServiceImpl.save(twittFollow2);
+        }
         TwittFollow twittFollow2 = new TwittFollow();
-        twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile").get());
+        twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile1").get());
         twittFollow2.setFollower(twitterUserServiceImpl.findByUsername("dev").get());
 
-        twittFollowServiceImpl.save(twittFollow1);
         twittFollowServiceImpl.save(twittFollow2);
 
+        twittFollow2 = new TwittFollow();
+        twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile4").get());
+        twittFollow2.setFollower(twitterUserServiceImpl.findByUsername("dev").get());
 
+        twittFollowServiceImpl.save(twittFollow2);
+
+        twittFollow2 = new TwittFollow();
+        twittFollow2.setFollowing(twitterUserServiceImpl.findByUsername("vasile9").get());
+        twittFollow2.setFollower(twitterUserServiceImpl.findByUsername("dev").get());
+
+        twittFollowServiceImpl.save(twittFollow2);
+
+        twittFollowServiceImpl.save(twittFollow2);
     }
 
 }
