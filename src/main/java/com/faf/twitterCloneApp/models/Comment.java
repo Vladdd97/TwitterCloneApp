@@ -22,10 +22,12 @@ public class Comment {
     @Type(type="timestamp")
     private Date createDate;
 
-    private String createByUser;
 
     @ManyToOne
     private Twitt twitt;
+
+    @ManyToOne
+    private TwitterUser twitterUser;
 
     public Long getId() {
         return id;
@@ -51,19 +53,19 @@ public class Comment {
         this.createDate = createDate;
     }
 
-    public String getCreateByUser() {
-        return createByUser;
-    }
-
-    public void setCreateByUser(String createByUser) {
-        this.createByUser = createByUser;
-    }
-
     public Twitt getTwitt() {
         return twitt;
     }
 
     public void setTwitt(Twitt twitt) {
         this.twitt = twitt;
+    }
+
+    public TwitterUser getTwitterUser() {
+        return twitterUser;
+    }
+
+    public void setTwitterUser(TwitterUser twitterUser) {
+        this.twitterUser = twitterUser;
     }
 }
