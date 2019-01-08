@@ -38,9 +38,6 @@ public class IndexController {
 
     @Autowired
     TweetFollowServiceImpl tweetFollowServiceImpl;
-    //delete
-    @Autowired
-    TwitterUserRepository twitterUserRepository;
 
 
 
@@ -58,7 +55,7 @@ public class IndexController {
             model.addAttribute("newComment",new Comment());
             model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber,pageSize));
             //model.addAttribute("authenticatedUserUsername",principal.getName());
-            //Page<TwitterUser> users = twitterUserRepository.findSuggestFollowUsers(new PageRequest(0,5));
+            List<TwitterUser> users = twitterUserServiceImpl.findSuggestFollowUsers(Long.valueOf(128),pageNumber,pageSize);
             TwitterUser dev = twitterUserServiceImpl.findByUsername(principal.getName()).get();
 
             int a=44;

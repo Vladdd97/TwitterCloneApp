@@ -21,8 +21,13 @@ public interface TwitterUserRepository extends CrudRepository<TwitterUser,Long> 
 //                    select following_id from tweet_follow where tweet_follow.follower_id = 128
 //            )
 
+//
+//    @Query("SELECT t FROM TwitterUser as t where t.id NOT IN " +
+//            "(SELECT  f.id FROM TwitterUser as ttt left join ttt.followings as f)")
 
-//    @Query("SELECT t FROM TwitterUser as t where t.id NOT IN (SELECT t2.id from TwitterUser. as t2 where t2.id < 100)")
-//    Page<TwitterUser> findSuggestFollowUsers(Pageable pageable);
+
+    @Query("SELECT t FROM TwitterUser as t where t.id NOT IN " +
+            "(SELECT  f.following.id FROM TweetFollow as f where f.follower.id = ?1) and t.id <> ?1")
+    Page<TwitterUser> findSuggestFollowUsers(Long twitterUserId,Pageable pageable);
 
 }
