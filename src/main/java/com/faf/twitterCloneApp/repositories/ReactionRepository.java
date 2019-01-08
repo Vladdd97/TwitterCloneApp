@@ -7,5 +7,5 @@ import java.util.Optional;
 
 public interface ReactionRepository extends CrudRepository<Reaction,Long> {
 
-    Optional<Reaction> findByTwittIdAndLikedByUser (Long twittId , String username);
+    Optional<Reaction> findByTweetIdAndLikedByUser (Long twittId , String username);
 }

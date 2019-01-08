@@ -50,7 +50,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/twitterUser/userTwitts*").hasRole("USER")
                 .antMatchers("/**").permitAll()
                 //.antMatchers("/public/**").permitAll()
-                //.antMatchers("/twitt/twttFrom").permitAll()
+                //.antMatchers("/tweet/twttFrom").permitAll()
                 .and().formLogin()
                 .loginPage("/loginPage")
                 .loginProcessingUrl("/loginPage")

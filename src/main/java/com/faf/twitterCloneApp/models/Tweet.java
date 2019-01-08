@@ -8,7 +8,7 @@ import java.util.Date;
 import java.util.List;
 
 @Entity
-public class Twitt {
+public class Tweet {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -25,11 +25,11 @@ public class Twitt {
     @Type(type="timestamp")
     private Date createDate;
 
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "tweet")
     private List<Comment> comments;
 
 
-    @OneToMany(cascade = CascadeType.ALL , mappedBy = "twitt")
+    @OneToMany(cascade = CascadeType.ALL , mappedBy = "tweet")
     private List<Reaction> reactions;
 
 

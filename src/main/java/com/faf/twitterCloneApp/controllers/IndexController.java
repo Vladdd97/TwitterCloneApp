@@ -1,7 +1,7 @@
 package com.faf.twitterCloneApp.controllers;
 
 
-import com.faf.twitterCloneApp.services.TwittService;
+import com.faf.twitterCloneApp.services.TweetService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,7 +16,7 @@ public class IndexController {
 
 
     @Autowired
-    TwittService twittServiceImpl;
+    TweetService tweetServiceImpl;
 
 
     @GetMapping("/")

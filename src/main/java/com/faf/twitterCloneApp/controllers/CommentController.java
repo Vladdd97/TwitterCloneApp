@@ -3,7 +3,7 @@ package com.faf.twitterCloneApp.controllers;
 
 import com.faf.twitterCloneApp.models.Comment;
 import com.faf.twitterCloneApp.services.CommentService;
-import com.faf.twitterCloneApp.services.TwittService;
+import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -22,7 +22,7 @@ public class CommentController {
     private CommentService commentServiceImpl;
 
     @Autowired
-    private TwittService twittServiceImpl;
+    private TweetService tweetServiceImpl;
 
     @Autowired
     private TwitterUserService twitterUserServiceImpl;
@@ -30,26 +30,26 @@ public class CommentController {
 //    @GetMapping("/commentForm")
 //    public String commentForm (Model model , Principal principal){
 ////
-////        model.addAttribute("twitt",new Twitt());
+////        model.addAttribute("tweet",new Tweet());
 ////        model.addAttribute("userDetails",principal);
 //        model.addAttribute("comment",new Comment());
 //        return "comment/commentForm";
 //    }
 
     @PostMapping("/saveOrUpdate")
-    public String saveOrUpdate (@RequestParam(value = "twittId",required = false) Long twittId,
+    public String saveOrUpdate (@RequestParam(value = "tweetId",required = false) Long tweetId,
                                 @RequestParam(value = "username",required = false) String username,
                                 @ModelAttribute Comment comment , Model model , Principal principal){
 
         comment.setCreateDate(new Date());
-        comment.setTwitt(twittServiceImpl.findById(twittId));
+        comment.setTweet(tweetServiceImpl.findById(tweetId));
         comment.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         commentServiceImpl.save(comment);
 
 
 
         model.addAttribute("userDetails",principal);
-        return "redirect:/twitterUser/userTwitts?username="+username;
+        return "redirect:/twitterUser/userTweets?username="+username;
     }
 
 

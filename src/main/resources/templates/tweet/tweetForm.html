@@ -15,7 +15,7 @@
 
 <div class="container">
     <h3>Twitt From</h3>
-    <form   th:action="@{/twitt/saveOrUpdate}" th:object="${twitt}" method="post">
+    <form   th:action="@{/tweet/saveOrUpdate}" th:object="${tweet}" method="post">
         <input type="hidden" th:field="*{id}"/>
         <div class="form-group">
             <label for="title">Title:</label>
@@ -27,7 +27,7 @@
             <input class="form-control" id="content" th:field="*{content}" >
         </div>
 
-            <span th:text="${twitt.getCreateDate()}" style="display: none"></span>
+            <span th:text="${tweet.getCreateDate()}" style="display: none"></span>
 
 
         <button type="submit" class="btn btn-primary">Submit</button>
@@ -35,7 +35,7 @@
 </div>
 
 
-<script type="text/javascript" th:src="@{/public/js/jquery.min.js}"></script>
-<script type="text/javascript" th:src="@{/public/js/bootstrap.min.js}"></script>
+<th:block th:include="partialViews/footer :: footer"></th:block>
+
 </body>
 </html>

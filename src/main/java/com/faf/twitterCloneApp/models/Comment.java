@@ -24,7 +24,7 @@ public class Comment {
 
 
     @ManyToOne
-    private Twitt twitt;
+    private Tweet tweet;
 
     @ManyToOne
     private TwitterUser twitterUser;
@@ -53,12 +53,12 @@ public class Comment {
         this.createDate = createDate;
     }
 
-    public Twitt getTwitt() {
-        return twitt;
+    public Tweet getTweet() {
+        return tweet;
     }
 
-    public void setTwitt(Twitt twitt) {
-        this.twitt = twitt;
+    public void setTweet(Tweet tweet) {
+        this.tweet = tweet;
     }
 
     public TwitterUser getTwitterUser() {

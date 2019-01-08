@@ -4,7 +4,7 @@ package com.faf.twitterCloneApp.models;
 import javax.persistence.*;
 
 @Entity
-public class TwittFollow {
+public class TweetFollow {
 
 
     @Id
