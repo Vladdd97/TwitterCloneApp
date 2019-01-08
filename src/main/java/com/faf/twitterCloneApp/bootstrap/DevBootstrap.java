@@ -43,7 +43,7 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
     public void initUser1(){
         //user 1
         TwitterUser twitterUser1 = new TwitterUser();
-        twitterUser1.setUsername("Vasile");
+        twitterUser1.setUsername("vasile");
         twitterUser1.setPassword("$2a$10$eET7zB2oNuhzsEDUMmy3L.VHvZ/N.NwbD4T5IKPl6cPZ0WNCAuhFG"); //vasile
         twitterUser1.setEnabled(true);
 

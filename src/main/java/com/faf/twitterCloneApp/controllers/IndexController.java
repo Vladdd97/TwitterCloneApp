@@ -11,6 +11,8 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 import java.security.Principal;
 import java.util.ArrayList;
@@ -51,4 +53,30 @@ public class IndexController {
         model.addAttribute("username",username);
         return "userTwitts";
     }
+
+    @GetMapping("/loginPage")
+    public ModelAndView loginPage(@RequestParam(value = "error",required = false) String error,
+                                  @RequestParam(value = "logout",	required = false) String logout){
+        ModelAndView model = new ModelAndView();
+        if (error != null) {
+            model.addObject("error", "Invalid Credentials provided.");
+        }
+
+        if (logout != null) {
+            model.addObject("logout", "Logged out from TwitterCloneApp successfully.");
+        }
+
+        model.setViewName("loginPage");
+        return model;
+    }
+
+
+    @GetMapping("/logoutPage")
+    public ModelAndView logoutPage(){
+        ModelAndView model = new ModelAndView();
+
+        model.setViewName("logoutPage");
+        return model;
+    }
+
 }
