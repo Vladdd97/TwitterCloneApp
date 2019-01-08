@@ -41,7 +41,7 @@ public class ReactionController {
 
 
         model.addAttribute("userDetails",principal);
-        return "redirect:/twitterUser/userTweets?username="+username;
+        return "redirect:/twitterUser/profilePage?username="+username;
     }
 
 }

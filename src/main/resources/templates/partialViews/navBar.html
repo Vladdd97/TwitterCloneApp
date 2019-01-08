@@ -25,20 +25,21 @@
                         <a th:href="@{/twitterUser/userDetails}" class="nav-link">Profile</a>
                     </li>
                     <li class="nav-item">
-                        <a th:href="@{/twitterUser/userTweets}" class="nav-link">Tweets</a>
+                        <a th:href="@{/twitterUser/profilePage}" class="nav-link">ProfilePage</a>
                     </li>
-                    <li th:if ="${userDetails != null}"  class="nav-item">
-                        <a  th:href="@{/twitterUser/userDetails}"  th:text="${userDetails.getName()}" class="nav-link">userName</a>
-                    </li>
-                    <li th:if ="${userDetails == null}"  class="nav-item">
+
+
+                    <li th:if ="${authenticatedUserUsername == null}"  class="nav-item">
                         <a  th:href="@{/}" class="nav-link">Guest</a>
                     </li>
-                    <li th:if ="${userDetails == null}" class="nav-item">
-                        <a th:href="@{/loginPage}" class="nav-link">Log In</a>
+                    <li th:unless ="${authenticatedUserUsername == null}"  class="nav-item">
+                        <a  th:href="@{/twitterUser/userDetails}"  th:text="${authenticatedUserUsername}" class="nav-link">userName</a>
                     </li>
 
-
-                    <li th:if ="${userDetails != null}" class="nav-item">
+                    <li th:if ="${authenticatedUserUsername == null}" class="nav-item">
+                        <a th:href="@{/loginPage}" class="nav-link">Log In</a>
+                    </li>
+                    <li th:unless ="${authenticatedUserUsername == null}" class="nav-item">
                         <a th:href="@{/logoutPage}" class="nav-link">Log Out</a>
                     </li>
                 </ul>
