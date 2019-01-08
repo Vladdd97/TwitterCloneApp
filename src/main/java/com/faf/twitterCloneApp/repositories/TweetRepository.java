@@ -13,6 +13,8 @@ public interface TweetRepository extends CrudRepository<Tweet,Long> {
     //findByTwitterUserUsername
     Iterable<Tweet> findAllByTwitterUserUsername(String username);
 
+    Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
+
     @Query("SELECT t FROM Tweet as t left join t.reactions as r group by t order by count(r.id) desc")
 //    @Query(value = "" +
 //            "SELECT tweet.id \n" +

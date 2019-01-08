@@ -30,6 +30,55 @@ public class TwitterUserController {
     @Autowired
     TwitterUserService twitterUserServiceImp;
 
+
+    @Autowired
+    TwitterUserService twitterUserServiceImpl;
+
+
+
+
+    @GetMapping("/homePage")
+    public String homePage(Model model, Principal principal) {
+
+        int pageNumber = 0;
+        int pageSize = 10;
+
+        model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
+        model.addAttribute("newTweet", new Tweet());
+        model.addAttribute("newComment", new Comment());
+        model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber, pageSize));
+        model.addAttribute("suggestFollowUsers", twitterUserServiceImpl.findSuggestFollowUsers(Long.valueOf(128), pageNumber, pageSize));
+        return "twitterUser/homePage";
+    }
+
+
+
+    @GetMapping("/profilePage")
+    public String profilePage (@RequestParam(value = "username",required = false) String username , Model model ,Principal principal){
+
+        if ( username == null){
+            username = principal.getName();
+        }
+
+        model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
+        model.addAttribute("tweets",tweetServiceImpl.findAllByTwitterUserUsernameOrderByCreateDateDesc(username));
+        model.addAttribute("newTweet", new Tweet());
+        model.addAttribute("newComment", new Comment());
+       return "twitterUser/profilePage";
+
+    }
+
+
+
+
+
+
+
+
+
+
+
+
     @GetMapping("/userDetails")
     public String userDetails (Model model , Principal principal){
 
@@ -66,7 +115,7 @@ public class TwitterUserController {
         tweetFollow.setFollowing(twitterUserServiceImp.findByUsername(username).get());
         tweetFollowServiceImpl.save(tweetFollow);
 
-        return "redirect:/";
+        return "redirect:/twitterUser/homePage";
     }
 
 

@@ -20,6 +20,8 @@ public interface TweetService {
 
     Iterable<Tweet> findAllByTwitterUserUsername(String username);
 
+    Iterable<Tweet> findAllByTwitterUserUsernameOrderByCreateDateDesc(String username);
+
     List<Tweet> findTopTweetsByNumberOfReactions(Integer pageNumber, Integer pageSize);
 
 }

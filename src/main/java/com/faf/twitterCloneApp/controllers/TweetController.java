@@ -37,7 +37,7 @@ public class TweetController {
         tweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         tweetServiceImpl.save(tweet);
 
-        return "redirect:/";
+        return "redirect:/twitterUser/homePage";
     }
 
 
@@ -52,7 +52,7 @@ public class TweetController {
     @GetMapping("/deleteTweet")
     public String deleteTwitt (@RequestParam("id") String id){
         tweetServiceImpl.deleteById(Long.valueOf(id));
-        return  "redirect:/";
+        return  "redirect:/twitterUser/homePage";
     }
 
     @GetMapping("/retweet")
@@ -64,7 +64,7 @@ public class TweetController {
         newTweet.setCreateDate(retweetedTweet.getCreateDate());
         newTweet.setTwitterUser(twitterUserServiceImpl.findByUsername(principal.getName()).get());
         tweetServiceImpl.save(newTweet);
-        return "redirect:/";
+        return "redirect:/twitterUser/homePage";
     }
 
 }
