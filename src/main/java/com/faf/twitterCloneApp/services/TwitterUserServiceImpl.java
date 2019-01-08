@@ -5,6 +5,8 @@ import com.faf.twitterCloneApp.repositories.TwitterUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class TwitterUserServiceImpl implements TwitterUserService {
 
@@ -34,5 +36,10 @@ public class TwitterUserServiceImpl implements TwitterUserService {
     @Override
     public Long count() {
         return twitterUserRepository.count();
+    }
+
+    @Override
+    public Optional<TwitterUser> findByUsername(String username) {
+        return twitterUserRepository.findByUsername(username);
     }
 }

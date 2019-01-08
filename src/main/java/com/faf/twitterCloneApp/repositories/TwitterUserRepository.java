@@ -10,5 +10,5 @@ public interface TwitterUserRepository extends CrudRepository<TwitterUser,Long> 
 
     //Optional<TwitterUser> findByUsername(String username);
 
-    //Optional<TwitterUser> findByUsername (String username);
+    Optional<TwitterUser> findByUsername (String username);
 }
