@@ -8,6 +8,8 @@ import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
 import com.faf.twitterCloneApp.services.TweetService;
 import com.faf.twitterCloneApp.services.TwitterUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,13 +36,12 @@ public class IndexController {
     @Autowired
     TweetFollowServiceImpl tweetFollowServiceImpl;
 
-    // delete
-    @Autowired
-    TweetRepository tweetRepository;
 
 
     @GetMapping("/")
     public String index (Model model , Principal principal){
+        int pageNumber = 0;
+        int pageSize = 10;
 //        BCryptPasswordEncoder bCryptPasswordEncoder = new BCryptPasswordEncoder();
 //        String password = "dev";
 //        System.out.println("password : " + password);
@@ -48,10 +49,7 @@ public class IndexController {
         if ( principal != null) {
             model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
             model.addAttribute("newTweet",new Tweet());
-            // delete
-            List<Object> tweets = tweetServiceImpl.findTopTweetsByNumberOfReactions();
-//            int a = ( (BigInteger) tweetIds.get(0) ).intValue();
-//            int b = ( (BigInteger) tweetIds.get(1) ).intValue();
+            model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber,pageSize));
             return "index";
         }
         else{

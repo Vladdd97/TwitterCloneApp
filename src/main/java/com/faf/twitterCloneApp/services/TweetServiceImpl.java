@@ -3,8 +3,11 @@ package com.faf.twitterCloneApp.services;
 import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -44,9 +47,11 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public List<Object> findTopTweetsByNumberOfReactions() {
-        List<Object> tweetIds = tweetRepository.findTopTweetsByNumberOfReactions();
+    public List<Tweet> findTopTweetsByNumberOfReactions(Integer pageNumber, Integer pageSize) {
 
-        return tweetIds;
+        List<Tweet> tweets = new ArrayList<>();
+        Page<Tweet> page = tweetRepository.findTopTweetsByNumberOfReactions(new PageRequest(pageNumber, pageSize));
+        page.get().forEach(t -> tweets.add(t));
+        return tweets;
     }
 }
