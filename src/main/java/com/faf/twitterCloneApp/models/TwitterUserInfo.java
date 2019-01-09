@@ -7,7 +7,9 @@ import org.hibernate.annotations.ColumnDefault;
 
 import javax.persistence.*;
 
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 public class TwitterUserInfo {

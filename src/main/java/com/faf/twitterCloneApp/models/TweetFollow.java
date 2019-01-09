@@ -5,7 +5,9 @@ import lombok.*;
 
 import javax.persistence.*;
 
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 public class TweetFollow {

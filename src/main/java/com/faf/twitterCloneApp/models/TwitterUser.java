@@ -8,7 +8,9 @@ import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
 import java.util.List;
 
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 public class TwitterUser {

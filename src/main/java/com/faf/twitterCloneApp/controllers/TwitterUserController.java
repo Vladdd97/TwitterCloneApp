@@ -5,6 +5,7 @@ import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.models.TweetFollow;
 import com.faf.twitterCloneApp.models.TwitterUser;
 import com.faf.twitterCloneApp.models.util.TweetType;
+import com.faf.twitterCloneApp.models.util.TweetView;
 import com.faf.twitterCloneApp.repositories.TweetFollowRepository;
 import com.faf.twitterCloneApp.services.TweetFollowService;
 import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
@@ -19,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import java.security.Principal;
+import java.util.ArrayList;
 
 @Controller
 @RequestMapping("/twitterUser")
@@ -74,7 +76,7 @@ public class TwitterUserController {
         }
 
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
-        model.addAttribute("tweets",tweetServiceImpl.findAllByTwitterUserUsernameOrderByCreateDateDesc(username));
+        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByTwitterUserUsername(username));
         model.addAttribute("newTweet", new Tweet());
         model.addAttribute("newComment", new Comment());
         model.addAttribute("authenticatedUserUsername",principal.getName());

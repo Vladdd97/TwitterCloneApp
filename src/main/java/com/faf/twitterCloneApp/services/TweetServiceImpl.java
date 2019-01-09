@@ -2,6 +2,7 @@ package com.faf.twitterCloneApp.services;
 
 import com.faf.twitterCloneApp.models.Tweet;
 import com.faf.twitterCloneApp.models.util.TweetType;
+import com.faf.twitterCloneApp.models.util.TweetView;
 import com.faf.twitterCloneApp.repositories.TweetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
@@ -75,5 +76,21 @@ public class TweetServiceImpl implements TweetService {
         Page<Tweet> page = tweetRepository.findTopTweetsByNumberOfReactions(new PageRequest(pageNumber, pageSize));
         page.get().forEach(t -> tweets.add(t));
         return tweets;
+    }
+
+    @Override
+    public ArrayList<TweetView> findAllTweetViewsByTwitterUserUsername(String username) {
+        ArrayList<TweetView> tweetViews = new ArrayList<>();
+        Iterable<Tweet> tweets = this.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
+        tweets.forEach( t->{
+            Tweet parentTweet = null;
+            Long parentTweetId = t.getParentTweetId();
+            if (parentTweetId != null){
+                parentTweet = this.findById(parentTweetId);
+            }
+            tweetViews.add(new TweetView(parentTweet,t));
+        } );
+
+        return tweetViews;
     }
 }

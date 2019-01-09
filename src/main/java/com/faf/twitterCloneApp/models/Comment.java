@@ -7,7 +7,9 @@ import org.hibernate.annotations.Type;
 import javax.persistence.*;
 import java.util.Date;
 
-@Data
+@EqualsAndHashCode
+@Getter
+@Setter
 @AllArgsConstructor
 @Entity
 public class Comment {
