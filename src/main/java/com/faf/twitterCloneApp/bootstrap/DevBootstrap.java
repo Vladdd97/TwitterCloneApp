@@ -120,6 +120,12 @@ public class DevBootstrap implements ApplicationListener<ContextRefreshedEvent> 
         tweet1.setCreateDate(new Date());
         tweet1.setTwitterUser(twitterUser2);
 
+        TwitterUserInfo twitterUserInfo = new TwitterUserInfo();
+        twitterUserInfo.setGender(Gender.Male);
+        twitterUserInfo.setEmail("vladislav.bantus@faf.utm.md");
+        twitterUserInfo.setTwitterUser(twitterUser2);
+        twitterUser2.setTwitterUserInfo(twitterUserInfo);
+
         Tweet tweet2 = new Tweet();
         tweet2.setContent("A Hollywood legend invites her not-so-normal family home for the holidays.");
         tweet2.setCreateDate(new Date());
