@@ -15,83 +15,25 @@
     <div class="row">
 
         <!--tweet card-->
-        <div th:each="tweet: ${tweets}" class="card mx-1 my-4">
-            <div class="card-body">
+        <div th:each="tweet: ${tweets}" >
 
-                <div class="card-title text-muted">
-                    <span>Posted on</span>
-                    <span th:text="${tweet.getCreateDate().toLocaleString()}"> ...</span>
-                    <span>by</span>
-                    <span class="text-primary" th:text="${tweet.getTwitterUser().getUsername()}">no user</span>
-                    <div th:if="${authenticatedUserUsername.equals(tweet.getTwitterUser().getUsername())}"
-                         class="float-right">
-                        <a th:href="@{/tweet/updateTweet(id=${tweet.getId()})}" class="mr-2">
-                            <i class="material-icons" style="font-size:24px;color:dodgerblue; cursor: pointer;"
-                               title="Edit Tweet">edit</i>
-                        </a>
-                        <a th:href="@{/tweet/deleteTweet(id=${tweet.getId()})}" class="text-danger">
-                            <i class="material-icons" style="font-size:24px;color:black; cursor: pointer;"
-                               title="Delete Tweet">delete</i>
-                        </a>
-                    </div>
-                    <div th:unless="${authenticatedUserUsername.equals(tweet.getTwitterUser().getUsername())}"
-                         class="float-right">
-                        <a th:href="@{/tweet/retweet(tweetId=${tweet.getId()})}">
-                            <i class="fa fa-share-square-o"
-                               style="font-size:36px;color:deepskyblue;  cursor: pointer;" title="Retweet"></i>
-                        </a>
-                    </div>
-                </div>
-                <p th:text="${tweet.getContent()}" class="card-text">Content of the Tweet</p>
-            </div>
-
-            <img class="card-img-bottom" src="http://placehold.it/750x300" alt="Card image" style="width:100%">
-
-            <div class="card-footer py-1">
-                <div class="text-primary float-left mt-3" data-toggle="collapse"
-                     th:attr="data-target='#comment'+${tweet.getId()}" style="cursor: pointer;">Comments
-                </div>
-
-                <div class="float-right mt-2">
-                    <a th:href="@{/reaction/saveOrUpdate(username = ${tweet.getTwitterUser().getUsername()} ,tweetId=${tweet.getId()})}">
-                        <i class="fa fa-heart" style="font-size:32px;color:#f44336"></i>
-                    </a>
-                    <span th:text="${tweet.getReactions().size()}">number</span>
-                </div>
-                <br>
-                <br>
-                <div th:id="'comment'+${tweet.getId()}" class="collapse">
-
-                    <div th:each="comment:${tweet.getComments()}" class="card my-2">
-                        <div class="card-header text-muted">
-                            <span>Posted on</span>
-                            <span th:text="${comment.getCreateDate().toLocaleString()}">no user</span>
-                            <span>by</span>
-                            <span th:text="${comment.getTwitterUser().getUsername()}"
-                                  class="text-info"> user </span>
-                        </div>
-                        <div class="card-body">
-                            <p th:text="${comment.getContent()}" class="card-text">With supporting text below as a
-                                natural lead-in to additional content.</p>
-                        </div>
-                    </div>
-
-
-                    <div class="container">
-                        <form th:action="@{/comment/saveOrUpdate(tweetId=${tweet.getId()} , username=${tweet.getTwitterUser().getUsername()})}"
-                              th:object="${newComment}" method="post">
-                            <input type="hidden" th:field="*{id}"/>
-                            <div class="form-group">
-                                <label for="content">Write your comment:</label>
-                                <input class="form-control" id="content" th:field="*{content}">
-                            </div>
-                            <button type="submit" class="btn btn-primary">Submit</button>
-                        </form>
-                    </div>
-
-                </div>
+            <!--<div th:switch="${tweet.getTweet().getType().toString()}">-->
+                <!--<div th:case="'Tweet'">-->
+                    <!--<th:block th:include="partialViews/tweetCard :: tweetCard"></th:block>-->
+                <!--</div>-->
+                <!--<div th:case="'Retweet'">-->
+                    <!--<th:block th:include="partialViews/retweetCard :: retweetCard"></th:block>-->
+                <!--</div>-->
+                <!--<div th:case="'Bookmark'">-->
+                    <!--<span></span>-->
+                <!--</div>-->
+                <!--<div th:case="*">This type does not exist</div>-->
+            <!--</div>-->
+            <div th:if="${tweet.getTweet().getType().toString().equals('Bookmark')}">
+                <th:block th:include="partialViews/bookmarkCard :: bookmarkCard"></th:block>
 
             </div>
+
         </div>
         <!--tweet card end-->
 

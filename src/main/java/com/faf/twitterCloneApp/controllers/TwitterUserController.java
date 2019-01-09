@@ -89,7 +89,7 @@ public class TwitterUserController {
     public String bookmarkPage(Model model, Principal principal) {
 
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
-        model.addAttribute("tweets",tweetServiceImpl.findAllByTwitterUserUsernameAndType(principal.getName(), TweetType.Bookmark));
+        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByTwitterUserUsername(principal.getName()));
         model.addAttribute("newComment", new Comment());
         model.addAttribute("authenticatedUserUsername",principal.getName());
 

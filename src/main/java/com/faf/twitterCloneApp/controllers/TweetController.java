@@ -63,6 +63,7 @@ public class TweetController {
         if (!tweetServiceImpl.findByParentTweetIdAndTypeAndTwitterUserUsername(tweetId,TweetType.Retweet,principal.getName()).isPresent() ) {
 
             Long parentTweetId;
+            Tweet parentTweet;
 
             Tweet retweetedTweet = tweetServiceImpl.findById(tweetId);
             Tweet newTweet = new Tweet();
@@ -73,6 +74,8 @@ public class TweetController {
 
             if (retweetedTweet.getParentTweetId() != null){
                 parentTweetId = retweetedTweet.getParentTweetId();
+                parentTweet = tweetServiceImpl.findById(parentTweetId);
+                newTweet.setContent(parentTweet.getContent());
             }
             else{
                 parentTweetId = tweetId;
@@ -97,6 +100,7 @@ public class TweetController {
         if (!tweetServiceImpl.findByParentTweetIdAndTypeAndTwitterUserUsername(tweetId,TweetType.Bookmark,principal.getName()).isPresent() ) {
 
             Long parentTweetId;
+            Tweet parentTweet;
 
             Tweet bookmarkedTweet = tweetServiceImpl.findById(tweetId);
             Tweet newTweet = new Tweet();
@@ -107,6 +111,8 @@ public class TweetController {
 
             if (bookmarkedTweet.getParentTweetId() != null){
                 parentTweetId = bookmarkedTweet.getParentTweetId();
+                parentTweet = tweetServiceImpl.findById(parentTweetId);
+                newTweet.setContent(parentTweet.getContent());
             }
             else{
                 parentTweetId = tweetId;
