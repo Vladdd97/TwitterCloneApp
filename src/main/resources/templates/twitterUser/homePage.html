@@ -88,6 +88,8 @@
             <!--tweet card-->
             <div th:each="tweet: ${tweets}" >
 
+                <div th:if="${tweet} != null">
+
                 <div th:switch="${tweet.getTweet().getType().toString()}">
                     <div th:case="'Tweet'">
                         <th:block th:include="partialViews/tweetCard :: tweetCard"></th:block>
@@ -99,6 +101,8 @@
                         <span></span>
                     </div>
                     <div th:case="*">This type does not exist</div>
+                </div>
+
                 </div>
 
             </div>

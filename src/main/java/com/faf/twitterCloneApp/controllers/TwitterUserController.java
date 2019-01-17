@@ -7,10 +7,7 @@ import com.faf.twitterCloneApp.models.TwitterUser;
 import com.faf.twitterCloneApp.models.util.TweetType;
 import com.faf.twitterCloneApp.models.util.TweetView;
 import com.faf.twitterCloneApp.repositories.TweetFollowRepository;
-import com.faf.twitterCloneApp.services.TweetFollowService;
-import com.faf.twitterCloneApp.services.TweetFollowServiceImpl;
-import com.faf.twitterCloneApp.services.TweetService;
-import com.faf.twitterCloneApp.services.TwitterUserService;
+import com.faf.twitterCloneApp.services.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -39,6 +36,9 @@ public class TwitterUserController {
     @Autowired
     TwitterUserService twitterUserServiceImpl;
 
+    @Autowired
+    TweetViewService tweetViewServiceImpl;
+
 
 
     @GetMapping("/homePage")
@@ -51,7 +51,7 @@ public class TwitterUserController {
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
         model.addAttribute("newTweet", new Tweet());
         model.addAttribute("newComment", new Comment());
-        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByOrderByCreateDateDesc(pageNumber,pageSize));
+        model.addAttribute("tweets",tweetViewServiceImpl.findAllTweetViewsByOrderByCreateDateDesc(pageNumber,pageSize));
         model.addAttribute("suggestFollowUsers", twitterUserServiceImpl.findSuggestFollowUsers(userId, pageNumber, pageSize));
         model.addAttribute("authenticatedUserUsername",principal.getName());
         return "twitterUser/homePage";
@@ -76,7 +76,7 @@ public class TwitterUserController {
         }
 
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(username).get());
-        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByTwitterUserUsername(username));
+        model.addAttribute("tweets",tweetViewServiceImpl.findAllTweetViewsByTwitterUserUsername(username));
         model.addAttribute("newTweet", new Tweet());
         model.addAttribute("newComment", new Comment());
         model.addAttribute("authenticatedUserUsername",principal.getName());
@@ -89,7 +89,7 @@ public class TwitterUserController {
     public String bookmarkPage(Model model, Principal principal) {
 
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
-        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByTwitterUserUsername(principal.getName()));
+        model.addAttribute("tweets",tweetViewServiceImpl.findAllTweetViewsByTwitterUserUsername(principal.getName()));
         model.addAttribute("newComment", new Comment());
         model.addAttribute("authenticatedUserUsername",principal.getName());
 

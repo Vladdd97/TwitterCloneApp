@@ -21,6 +21,8 @@
         <div class="form-group">
             <label for="content">Content:</label>
             <input class="form-control" id="content" th:field="*{content}" >
+
+            <input type="hidden" class="form-control" id="content" th:field="*{type}" >
         </div>
 
             <span th:text="${tweet.getCreateDate()}" style="display: none"></span>
