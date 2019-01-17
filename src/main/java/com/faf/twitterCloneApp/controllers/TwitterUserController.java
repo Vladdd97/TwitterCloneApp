@@ -51,7 +51,7 @@ public class TwitterUserController {
         model.addAttribute("userInfo", twitterUserServiceImpl.findByUsername(principal.getName()).get());
         model.addAttribute("newTweet", new Tweet());
         model.addAttribute("newComment", new Comment());
-        model.addAttribute("topTweetsByNumberOfReactions", tweetServiceImpl.findTopTweetsByNumberOfReactions(pageNumber, pageSize));
+        model.addAttribute("tweets",tweetServiceImpl.findAllTweetViewsByOrderByCreateDateDesc(pageNumber,pageSize));
         model.addAttribute("suggestFollowUsers", twitterUserServiceImpl.findSuggestFollowUsers(userId, pageNumber, pageSize));
         model.addAttribute("authenticatedUserUsername",principal.getName());
         return "twitterUser/homePage";

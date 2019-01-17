@@ -33,6 +33,12 @@ public interface TweetService {
 
     List<Tweet> findTopTweetsByNumberOfReactions(Integer pageNumber, Integer pageSize);
 
-    ArrayList<TweetView> findAllTweetViewsByTwitterUserUsername(String username);
+    List<TweetView> findAllTweetViewsByTwitterUserUsername(String username);
+
+    List<Tweet>  findAllByOrderByCreateDateDesc (Integer pageNumber, Integer pageSize);
+
+    List<TweetView>  findAllTweetViewsByOrderByCreateDateDesc (Integer pageNumber, Integer pageSize);
+
+
 
 }

@@ -37,4 +37,8 @@ public interface TweetRepository extends CrudRepository<Tweet,Long> {
 //            "",
 //            nativeQuery = true)
     Page<Tweet>  findTopTweetsByNumberOfReactions(Pageable pageable);
+
+
+
+    Page<Tweet>  findAllByOrderByCreateDateDesc(Pageable pageable);
 }

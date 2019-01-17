@@ -55,7 +55,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public Iterable<Tweet> findAllByTwitterUserUsernameAndType(String username, TweetType tweetType) {
-        return tweetRepository.findAllByTwitterUserUsernameAndType(username,tweetType);
+        return tweetRepository.findAllByTwitterUserUsernameAndType(username, tweetType);
     }
 
     @Override
@@ -66,7 +66,7 @@ public class TweetServiceImpl implements TweetService {
 
     @Override
     public Optional<Tweet> findByParentTweetIdAndTypeAndTwitterUserUsername(Long parentTweetId, TweetType tweetType, String username) {
-        return tweetRepository.findByParentTweetIdAndTypeAndTwitterUserUsername(parentTweetId,tweetType,username);
+        return tweetRepository.findByParentTweetIdAndTypeAndTwitterUserUsername(parentTweetId, tweetType, username);
     }
 
     @Override
@@ -79,18 +79,44 @@ public class TweetServiceImpl implements TweetService {
     }
 
     @Override
-    public ArrayList<TweetView> findAllTweetViewsByTwitterUserUsername(String username) {
+    public List<TweetView> findAllTweetViewsByTwitterUserUsername(String username) {
         ArrayList<TweetView> tweetViews = new ArrayList<>();
         Iterable<Tweet> tweets = this.findAllByTwitterUserUsernameOrderByCreateDateDesc(username);
-        tweets.forEach( t->{
+        tweets.forEach(t -> {
             Tweet parentTweet = null;
             Long parentTweetId = t.getParentTweetId();
-            if (parentTweetId != null){
+            if (parentTweetId != null) {
                 parentTweet = this.findById(parentTweetId);
             }
-            tweetViews.add(new TweetView(parentTweet,t));
-        } );
+            tweetViews.add(new TweetView(parentTweet, t));
+        });
+
+        return tweetViews;
+    }
+
+    @Override
+    public List<Tweet> findAllByOrderByCreateDateDesc(Integer pageNumber, Integer pageSize) {
+
+        List<Tweet> tweets = new ArrayList<>();
+        Page<Tweet> page = tweetRepository.findAllByOrderByCreateDateDesc(new PageRequest(pageNumber, pageSize));
+        page.get().forEach(t -> tweets.add(t));
+        return tweets;
+    }
+
+    @Override
+    public List<TweetView> findAllTweetViewsByOrderByCreateDateDesc(Integer pageNumber, Integer pageSize) {
+        List<TweetView> tweetViews = new ArrayList<>();
+        Iterable<Tweet> tweets = this.findAllByOrderByCreateDateDesc(pageNumber, pageSize);
+        tweets.forEach(t -> {
+            Tweet parentTweet = null;
+            Long parentTweetId = t.getParentTweetId();
+            if (parentTweetId != null) {
+                parentTweet = this.findById(parentTweetId);
+            }
+            tweetViews.add(new TweetView(parentTweet, t));
+        });
 
         return tweetViews;
     }
 }
+
