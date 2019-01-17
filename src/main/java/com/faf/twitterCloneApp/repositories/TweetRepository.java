@@ -41,4 +41,7 @@ public interface TweetRepository extends CrudRepository<Tweet,Long> {
 
 
     Page<Tweet>  findAllByOrderByCreateDateDesc(Pageable pageable);
+
+    Iterable<Tweet> findAllByParentTweetId(Long parentTweetId);
+
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
 import java.util.Date;
+import java.util.List;
 
 @Controller
 @RequestMapping("/tweet")
@@ -51,7 +52,15 @@ public class TweetController {
 
 
     @GetMapping("/deleteTweet")
-    public String deleteTwitt (@RequestParam("id") String id){
+    public String deleteTweet (@RequestParam("id") String id){
+
+        Iterable<Tweet> tweets = tweetServiceImpl.findAllByParentTweetId(Long.valueOf(id));
+        if (tweets != null){
+            tweets.forEach(t -> {
+                tweetServiceImpl.deleteById(t.getId());
+            });
+        }
+
         tweetServiceImpl.deleteById(Long.valueOf(id));
         return  "redirect:/twitterUser/profilePage";
     }

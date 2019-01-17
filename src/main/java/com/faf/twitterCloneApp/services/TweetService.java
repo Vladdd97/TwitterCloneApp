@@ -39,6 +39,9 @@ public interface TweetService {
 
     List<TweetView>  findAllTweetViewsByOrderByCreateDateDesc (Integer pageNumber, Integer pageSize);
 
+    Iterable<Tweet> findAllByParentTweetId(Long parentTweetId);
+
+
 
 
 }

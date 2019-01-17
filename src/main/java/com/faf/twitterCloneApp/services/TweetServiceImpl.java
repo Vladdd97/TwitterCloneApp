@@ -118,5 +118,10 @@ public class TweetServiceImpl implements TweetService {
 
         return tweetViews;
     }
+
+    @Override
+    public Iterable<Tweet> findAllByParentTweetId(Long parentTweetId) {
+        return tweetRepository.findAllByParentTweetId(parentTweetId);
+    }
 }
 
