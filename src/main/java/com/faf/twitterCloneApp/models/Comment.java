@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
@@ -29,9 +30,11 @@ public class Comment {
 
 
     @ManyToOne
+    @JsonBackReference
     private Tweet tweet;
 
     @ManyToOne
+    @JsonBackReference
     private TwitterUser twitterUser;
 
     public Comment(){}

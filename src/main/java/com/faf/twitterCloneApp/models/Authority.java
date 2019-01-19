@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -19,6 +20,7 @@ public class Authority {
     private String role;
 
     @ManyToOne
+    @JsonBackReference
     private TwitterUser twitterUser;
 
     public Authority() {

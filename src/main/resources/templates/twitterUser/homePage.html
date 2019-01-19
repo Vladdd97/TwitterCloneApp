@@ -44,17 +44,18 @@
                 <ul class="list-group list-group-flush">
                     <li class="list-group-item">
                         <!--count how many users have this user as follower one-->
-                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followings')}" >Following</a>
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followings')}">Following</a>
                         <span th:text="${userInfo.getFollowers().size()}"></span>
                     </li>
                     <li class="list-group-item">
                         <!--count how many users have this user as following one-->
-                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followers')}" >Followers</a>
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='followers')}">Followers</a>
                         <span th:text="${userInfo.getFollowings().size()}"></span>
                     </li>
                     <li class="list-group-item">
                         <!--count how many users have this user as following one-->
-                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='all')}" >See all connections</a>
+                        <a th:href="@{/tweetFollow/connections(username=${userInfo.getUsername()},connectionType='all')}">See
+                            all connections</a>
                         <span th:text="${userInfo.getFollowings().size()}+${userInfo.getFollowers().size()}"></span>
                     </li>
                 </ul>
@@ -72,8 +73,10 @@
                 <!--user suggest card-->
                 <div th:each="user:${suggestFollowUsers}" class="card mt-2">
                     <div class="card-body">
-                        <a th:text="${user.getUsername()}" th:href="@{/twitterUser/profilePage(username=${user.getUsername()})}"   ></a>
-                        <a th:href="@{/tweetFollow/followUser(username=${user.getUsername()})}" class="btn btn-primary ml-5">Follow</a>
+                        <a th:text="${user.getUsername()}"
+                           th:href="@{/twitterUser/profilePage(username=${user.getUsername()})}"></a>
+                        <a th:href="@{/tweetFollow/followUser(username=${user.getUsername()})}"
+                           class="btn btn-primary ml-5">Follow</a>
                     </div>
                 </div>
                 <!--end of user suggest card-->
@@ -84,11 +87,9 @@
         <div class="col-7">
 
 
-
             <!--tweet card-->
-            <div th:each="tweet: ${tweets}" >
+            <div th:each="tweet: ${tweets}">
 
-                <div th:if="${tweet} != null">
 
                 <div th:switch="${tweet.getTweet().getType().toString()}">
                     <div th:case="'Tweet'">
@@ -103,7 +104,6 @@
                     <div th:case="*">This type does not exist</div>
                 </div>
 
-                </div>
 
             </div>
             <!--tweet card end-->

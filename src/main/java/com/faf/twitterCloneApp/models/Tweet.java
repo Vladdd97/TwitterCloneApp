@@ -2,6 +2,8 @@ package com.faf.twitterCloneApp.models;
 
 
 import com.faf.twitterCloneApp.models.util.TweetType;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.*;
 import org.hibernate.annotations.Type;
 
@@ -25,6 +27,7 @@ public class Tweet {
     private String content;
 
     @ManyToOne
+    @JsonBackReference
     private TwitterUser twitterUser;
 
     @Column
@@ -32,10 +35,12 @@ public class Tweet {
     private Date createDate;
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "tweet")
+    @JsonManagedReference
     private List<Comment> comments;
 
 
     @OneToMany(cascade = CascadeType.ALL , mappedBy = "tweet")
+    @JsonManagedReference
     private List<Reaction> reactions;
 
     private TweetType type;

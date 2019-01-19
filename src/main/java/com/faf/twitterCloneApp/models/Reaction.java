@@ -1,5 +1,6 @@
 package com.faf.twitterCloneApp.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -23,6 +24,7 @@ public class Reaction {
     private String likedByUser;
 
     @ManyToOne
+    @JsonBackReference
     private Tweet tweet;
 
     public Reaction(){}

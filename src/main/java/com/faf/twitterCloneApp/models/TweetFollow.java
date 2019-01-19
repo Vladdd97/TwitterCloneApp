@@ -1,6 +1,7 @@
 package com.faf.twitterCloneApp.models;
 
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 
 import javax.persistence.*;
@@ -18,9 +19,11 @@ public class TweetFollow {
     private Long id;
 
     @ManyToOne
+    @JsonBackReference
     private TwitterUser following;
 
     @ManyToOne
+    @JsonBackReference
     private TwitterUser follower;
 
     public TweetFollow(){}

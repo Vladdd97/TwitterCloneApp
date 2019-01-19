@@ -2,6 +2,7 @@ package com.faf.twitterCloneApp.models;
 
 
 import com.faf.twitterCloneApp.models.util.Gender;
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import lombok.*;
 import org.hibernate.annotations.ColumnDefault;
 
@@ -29,6 +30,7 @@ public class TwitterUserInfo {
     private Boolean isEmailNotificationEnabled;
 
     @OneToOne
+    @JsonBackReference
     private TwitterUser twitterUser;
 
     public TwitterUserInfo(){}

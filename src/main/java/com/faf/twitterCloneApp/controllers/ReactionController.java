@@ -2,7 +2,6 @@ package com.faf.twitterCloneApp.controllers;
 
 import com.faf.twitterCloneApp.models.Reaction;
 import com.faf.twitterCloneApp.models.Tweet;
-import com.faf.twitterCloneApp.models.TwitterUser;
 import com.faf.twitterCloneApp.services.EmailService;
 import com.faf.twitterCloneApp.services.ReactionService;
 import com.faf.twitterCloneApp.services.TweetService;
